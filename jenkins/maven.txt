@@ -1,0 +1,10 @@
+http://mirrors.shuosc.org/apache/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
+
+vim /etc/profile
+
+MAVEN_HOME=/opt/maven/apache-maven-3.5.2
+export MAVEN_HOME
+export PATH=${PATH}:${MAVEN_HOME}/bin
+
+
+source /etc/profile

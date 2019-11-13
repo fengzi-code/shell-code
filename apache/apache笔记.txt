@@ -1,0 +1,48 @@
+yum -y install gcc gcc-c++ 安装编辑器
+
+1.apr
+./configure --prefix=/opt/soft/apr
+2.apr-util
+ ./configure --prefix=/opt/soft/apr-util -with-apr=/opt/soft/apr/bin/apr-1-config 
+3.pcre
+./configure --prefix=/opt/soft/pcre
+------------------------------------------------------------------------
+
+
+
+下载Apache安装包（httpd-2.4.3.tar.gz或httpd-2.2.23.tar.gz），下载地址：http://httpd.apache.org/
+在安装Apache时，我分别针对不同版本进行了安装，在编译时是不同的，configure后跟的参数不同。 
+httpd-2.2.23版本编译命令： 
+./configure –prefix=/usr/local/apache2 （安装目录参数后面可以不加任何参数，直接安装即可） 
+make 
+make install 
+httpd-2.4.3版本编译命令： 
+./configure -prefix=/usr/local/apache2 -with-apr=/opt/soft/apr -with-apr-util=/opt/soft/apr-util -with-pcre=/opt/soft/pcre  --enable-so --enable-rewrite=shared --enable-speling --enable-mods-shared=most --with-mpm=worker
+
+（除了指定Apache的安装目录外，还要安装apr、apr-util、pcre，并指定参数） 
+make 
+make install 
+
+
+问题b：xml/apr_xml.c:35:19: 致命错误：expat.h：没有那个文件或目录  #include <expat.h>
+
+  解决：缺少expat-devel包
+
+
+?启动Apache：/usr/local/apache2/bin/apachectl start 
+?停止Apache：/usr/local/apache2/bin/apachectl stop 
+?重启Apache：/usr/local/apache2/bin/apachectl restart 
+网站放在/usr/local/apache2/htdocs目录下 
+
+
+cp /usr/local/apache2/bin/apachectl /etc/rc.d/init.d/httpd
+vi /etc/rc.d/init.d/httpd
+在第二行加入
+　# chkconfig: 35 61 61
+　　# description: Apache
+　　第一行的3个参数意义分别为：在哪些运行级别启动httpd（3，5）；启动序号（S61）；关闭序号（K61）。注意：第二行的描述必须要写！
+　　保存后执行：chkconfig --add httpd
+修改防火墙
+
+
+ServerName localhost:80

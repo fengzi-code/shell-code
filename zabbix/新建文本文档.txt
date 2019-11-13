@@ -1,0 +1,138 @@
+wget https://nchc.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/3.2.7/zabbix-3.2.7.tar.gz
+
+https://ncu.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/3.4.2/zabbix-3.4.2.tar.gz
+
+#groupadd zabbix -g 501   #创建用户组，并且设置UID501  
+#useradd -g zabbix -u 501 -m zabbix
+
+./configure --prefix=/opt/soft/zabbix_server --enable-server --enable-agent --with-mysql=/opt/soft/mysql/bin/mysql_config --enable-ipv6 --with-net-snmp --with-libcurl --with-libxml --enable-java
+
+./configure --prefix=/usr/local/zabbix --enable-server --enable-agent --enable-proxy --with-mysql --with-net-snmp --with-libcurl --with-libxml2
+
+
+make 
+make install
+
+find / -name "mysql_config*"
+
+configure: error: Curl library not found
+yum install curl-devel 
+
+第一次编译时时出现问题“configure: error: LIBXML2 library not found” 如下
+
+yum install libxml2-devel
+yum install libevent-devel
+
+yum install net-snmp-devel
+
+/usr/local/zabbix/sbin/zabbix_server -V  验证安装成功
+
+提示找不到libmysqlclient.so.20
+ln -s /usr/local/mysql/lib/libmysqlclient.so.20.3.6 /usr/lib64/libmysqlclient.so.20
+
+vi /usr/local/zabbix/etc/zabbix_server.conf
+DBName=zabbix
+DBUser=zabbix
+DBPassword=zabbix
+
+vi /usr/local/zabbix/etc/zabbix_agentd.conf
+Server=127.0.0.1
+ServerActive=127.0.0.1
+Hostname=127.0.0.1
+开放zabbix端口10050和10051修改firewall设置
+
+修改服务器端启动文件
+
+　　#vi /etc/init.d/zabbix_server
+
+　　将BASEDIR=/usr/local/替换为BASEDIR=/usr/local/zabbix（以之前编译的位置为准)
+
+　　修改客户器端启动文件：
+
+　　#vi /etc/init.d/zabbix_agentd
+
+　　将BASEDIR=/usr/local/替换为BASEDIR=/usr/local/zabbix（以之前编译的位置为准)
+
+ 服务启动与配置验证
+/etc/init.d/zabbix_server start
+/usr/local/zabbix/sbin/zabbix_server
+ 设置zabbix server 和zabbix agentd开机自动启动
+ chkconfig --add zabbix_server
+chkconfig --add zabbix_agentd
+拷贝源码包中的前端PHP代码到apache根目录
+cp -a ./frontends/php/  /opt/www/nginx/html/zabbix
+更改zabbix网页文件权限
+chown -R zabbix.zabbix  /var/www/html/zabbix/
+
+
+
+
+vi /etc/php.ini
+
+#在php配置文件的672行将8M改为16M
+ 672 post_max_size = 8M-->16M
+
+#在384行将30改为300
+384 max_execution_time = 30-->300
+#在394行将max_inpu_time原来60改为300
+394 max_input_time = 60-->300
+#在配置文件878行添加亚洲时区
+878 ;date.timezone =
+878  date.timezone = Asia/Shanghai 
+--------------------------------------
+php模块安装
+
+/usr/local/php/bin/phpize
+出错解决
+wget http://ftp.gnu.org/gnu/m4/m4-1.4.9.tar.gz
+tar -zvxf m4-1.4.9.tar.gz
+cd m4-1.4.9/
+./configure && make && make install
+
+yum install autoconf
+----------------------------------------
+PHP databases support 错误
+
+./configure --prefix=/usr/local/mysqli --with-php-config=/usr/local/php/bin/php-config --with-mysqli=/usr/local/mysql/bin/mysql_config  
+
+make make install
+vim /usr/local/php/etc/php.ini  修改 extension=mysqli.so 保存重启php即可
+
+--------------------------------------------------
+always_populate_raw_post_data 错误
+php.ini always_populate_raw_post_data 设置为-1
+mbstring.func_overload  设置为0
+-------------------------------------------------
+PHP sockets出错
+cd /opt/www/php2/ext/sockets
+make clean
+
+/usr/local/php/bin/phpize
+./configure --enable-sockets --with-php-config=/usr/local/php/bin/php-config
+make
+make install
+
+vim /usr/local/php/etc/php.ini  增加 extension=sockets.so
+-----------------------------------------------------------
+PHP LDAP 警告
+/opt/php_yuanma/php-5.6.30/ext/ldap
+/usr/local/php/bin/phpize
+cp -frp /usr/lib64/libldap* /usr/lib/
+ ./configure  --with-php-config=/opt/soft/php/bin/php-config  --with-ldap
+
+extension=ldap.so
+--------------------------------------
+create database zabbix default charset utf8;
+grant all on zabbix.* to zabbix@'%' identified by 'zabbixSL88';
+flush privileges;
+
+28000
+use mysql;
+select user,host from user;
+
+
+source /opt/soft/yuanma/zabbix-3.4.4/database/mysql/schema.sql
+source /opt/soft/yuanma/zabbix-3.4.4/database/mysql/images.sql
+source /opt/soft/yuanma/zabbix-3.4.4/database/mysql/data.sql
+
+

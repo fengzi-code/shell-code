@@ -1,0 +1,63 @@
+docker exec -it xxxxxxxxx /bin/bash  service httpd restart #进入容器的环境再运行命令
+docker exec xxxxxxxxx service httpd restart #运行容器里面的命令
+docker inspect xxxxxxxxx |grep -i ipaddr #运行容器里面的命令
+
+docker images 
+
+# 使用docker镜像nginx:latest以后台模式启动一个容器,并将容器命名为mynginx。
+# docker run --name mynginx -d nginx:latest 
+
+# 使用镜像nginx:latest以后台模式启动一个容器,并将容器的80端口映射到主机随机端口。
+# docker run -P -d nginx:latest 
+
+# 使用镜像nginx:latest以后台模式启动一个容器,将容器的80端口映射到主机的80端口,主机的目录/data映射到容器的/data。
+# docker run -p 80:80 -v /data:/data -d nginx:latest 
+
+# 使用镜像nginx:latest以交互模式启动一个容器,在容器内执行/bin/bash命令。
+# docker run -it nginx:latest /bin/bash 
+
+# 连接到容器查看访问信息。
+# docker attach mynginx 
+
+
+#查看所有容器的状态
+# docker ps -a 
+CONTAINER ID        IMAGE           COMMAND           CREATED             STATUS                  PORTS    NAMES
+d4a75f165ce6        centos          "/bin/bash"       2 minutes ago       Exited (0) 23 seconds ago        cranky_mahavira
+可见此时容器的状态是Exited，那么，如何再次运行这个容器呢？可以使用docker start命令
+
+运行容器
+# docker start cranky_mahavira 
+
+#使用当前目录的Dockerfile创建镜像。
+# docker build -t test/ubuntu:v1  
+
+# 生成新的镜像
+# docker commit centos_v1 centos:v1 
+68ad49c999496cff25fdda58f0521530a143d3884e61bce7ada09bdc22337638
+
+# 将新的镜像传到hub，其中v1是tag，可不写，默认是latest 
+# docker push victor/centos:v1 
+# 拉取nginx镜像
+# docker pull nginx 
+
+
+# 强制删除容器db01、db02
+# docker rm -f db01、db02 
+# 移除容器nginx01对容器db01的连接，连接名db
+# docker rm -l db  
+# 删除容器nginx01,并删除容器挂载的数据卷
+# docker rm -v nginx01 
+
+# 强制删除本地镜像test/centos:v3。
+# docker rmi -f test/centos:v3 
+
+
+# 将镜像打包，与上面的load命令相对应
+# docker save -o nginx.tar nginx 
+
+# docker search nginx    #查找
+# docker start nginx     #启动
+# docker restart nginx   #重新启动
+# docker stop nginx      #停止
+# docker stats nginx     #状态

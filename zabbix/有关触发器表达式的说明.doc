@@ -1,0 +1,456 @@
+Message-ID: <386583079.29838.1548234179860.JavaMail.confluence1@mzj-01>
+Subject: Exported From Confluence
+MIME-Version: 1.0
+Content-Type: multipart/related; 
+	boundary="----=_Part_29837_1443555332.1548234179860"
+
+------=_Part_29837_1443555332.1548234179860
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/exported.html
+
+<html xmlns:o=3D'urn:schemas-microsoft-com:office:office'
+      xmlns:w=3D'urn:schemas-microsoft-com:office:word'
+      xmlns:v=3D'urn:schemas-microsoft-com:vml'
+      xmlns=3D'urn:w3-org-ns:HTML'>
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+">
+    <title>=E6=9C=89=E5=85=B3=E8=A7=A6=E5=8F=91=E5=99=A8=E8=A1=A8=E8=BE=BE=
+=E5=BC=8F=E7=9A=84=E8=AF=B4=E6=98=8E</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:TargetScreenSize>1024x640</o:TargetScreenSize>
+            <o:PixelsPerInch>72</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+                <!--
+        @page Section1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+            mso-paper-source: 0;
+        }
+
+        table {
+            border: solid 1px;
+            border-collapse: collapse;
+        }
+
+        table td, table th {
+            border: solid 1px;
+            padding: 5px;
+        }
+
+        td {
+            page-break-inside: avoid;
+        }
+
+        tr {
+            page-break-after: avoid;
+        }
+
+        div.Section1 {
+            page: Section1;
+        }
+
+        /* Confluence print stylesheet. Common to all themes for print medi=
+a */
+/* Full of !important until we improve batching for print CSS */
+
+@media print {
+    #main {
+        padding-bottom: 1em !important; /* The default padding of 6em is to=
+o much for printouts */
+    }
+
+    body {
+        font-family: Arial, Helvetica, FreeSans, sans-serif;
+        font-size: 10pt;
+        line-height: 1.2;
+    }
+
+    body, #full-height-container, #main, #page, #content, .has-personal-sid=
+ebar #content {
+        background: #fff !important;
+        color: #000 !important;
+        border: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    a, a:link, a:visited, a:focus, a:hover, a:active {
+        color: #000;
+    }
+
+    #content h1,
+    #content h2,
+    #content h3,
+    #content h4,
+    #content h5,
+    #content h6 {
+        font-family: Arial, Helvetica, FreeSans, sans-serif;
+        page-break-after: avoid;
+    }
+
+    pre {
+        font-family: Monaco, "Courier New", monospace;
+    }
+
+    #header,
+    .aui-header-inner,
+    #navigation,
+    #sidebar,
+    .sidebar,
+    #personal-info-sidebar,
+    .ia-fixed-sidebar,
+    .page-actions,
+    .navmenu,
+    .ajs-menu-bar,
+    .noprint,
+    .inline-control-link,
+    .inline-control-link a,
+    a.show-labels-editor,
+    .global-comment-actions,
+    .comment-actions,
+    .quick-comment-container,
+    #addcomment {
+        display: none !important;
+    }
+
+    /* CONF-28544 cannot print multiple pages in IE */
+    #splitter-content {
+        position: relative !important;
+    }
+
+    .comment .date::before {
+        content: none !important; /* remove middot for print view */
+    }
+
+    h1.pagetitle img {
+        height: auto;
+        width: auto;
+    }
+
+    .print-only {
+        display: block;
+    }
+
+    #footer {
+        position: relative !important; /* CONF-17506 Place the footer at en=
+d of the content */
+        margin: 0;
+        padding: 0;
+        background: none;
+        clear: both;
+    }
+
+    #poweredby {
+        border-top: none;
+        background: none;
+    }
+
+    #poweredby li.print-only {
+        display: list-item;
+        font-style: italic;
+    }
+
+    #poweredby li.noprint {
+        display: none;
+    }
+
+    /* no width controls in print */
+    .wiki-content .table-wrap,
+    .wiki-content p,
+    .panel .codeContent,
+    .panel .codeContent pre,
+    .image-wrap {
+        overflow: visible !important;
+    }
+
+    /* TODO - should this work? */
+    #children-section,
+    #comments-section .comment,
+    #comments-section .comment .comment-body,
+    #comments-section .comment .comment-content,
+    #comments-section .comment p {
+        page-break-inside: avoid;
+    }
+
+    #page-children a {
+        text-decoration: none;
+    }
+
+    /**
+     hide twixies
+
+     the specificity here is a hack because print styles
+     are getting loaded before the base styles. */
+    #comments-section.pageSection .section-header,
+    #comments-section.pageSection .section-title,
+    #children-section.pageSection .section-header,
+    #children-section.pageSection .section-title,
+    .children-show-hide {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .children-show-hide.icon {
+        display: none;
+    }
+
+    /* personal sidebar */
+    .has-personal-sidebar #content {
+        margin-right: 0px;
+    }
+
+    .has-personal-sidebar #content .pageSection {
+        margin-right: 0px;
+    }
+
+    .no-print, .no-print * {
+        display: none !important;
+    }
+}
+-->
+    </style>
+</head>
+<body>
+    <h1>=E6=9C=89=E5=85=B3=E8=A7=A6=E5=8F=91=E5=99=A8=E8=A1=A8=E8=BE=BE=E5=
+=BC=8F=E7=9A=84=E8=AF=B4=E6=98=8E</h1>
+    <div class=3D"Section1">
+        <p align=3D"center">=E6=9C=89=E5=85=B3=E8=A7=A6=E5=8F=91=E5=99=A8=
+=E8=A1=A8=E8=BE=BE=E5=BC=8F=E7=9A=84=E8=AF=B4=E6=98=8E</p>
+<p align=3D"left">=E5=81=87=E8=AE=BE=E4=B8=BB=E6=9C=BA=E5=90=8D=E4=B8=BA=EF=
+=BC=9AZabbix server=E7=9B=91=E6=8E=A7=E9=A1=B9cpu0_used=E7=9A=84=E9=94=AE=
+=E5=80=BC=E4=B8=BAcpu.used.per.core.[cpu0]=EF=BC=8C=E6=9B=B4=E6=96=B0=E9=97=
+=B4=E9=9A=94=E6=98=AF30s=E3=80=82=E7=8E=B0=E5=9C=A8=E6=97=B6=E9=97=B4=E6=98=
+=AF16:11:20=EF=BC=8C=E5=80=BC=E6=98=AF15=EF=BC=8C16:10:50=E7=9A=84=E5=80=BC=
+=E6=98=AF8=EF=BC=8C16:10:20=E7=9A=84=E5=80=BC=E6=98=AF11=EF=BC=8C16:09:50=
+=E7=9A=84=E5=80=BC=E6=98=AF17=EF=BC=8C16:09:20=E7=9A=84=E5=80=BC=E6=98=AF9=
+=EF=BC=8C16:08:50=E7=9A=84=E5=80=BC=E6=98=AF4=EF=BC=8C16:08:20=E7=9A=84=E5=
+=80=BC=E6=98=AF7=EF=BC=8C16:07:50=E7=9A=84=E5=80=BC=E6=98=AF12=E3=80=82=E6=
+=B1=82=E4=BB=A5=E4=B8=8B=E8=A1=A8=E8=BE=BE=E5=BC=8F=E7=BB=93=E6=9E=9C</p>
+<div class=3D"table-wrap">
+<table class=3D"confluenceTable">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td class=3D"confluenceTd"><p align=3D"center">16:11:20</p></td>
+<td class=3D"confluenceTd"><p align=3D"center">16:10:50</p></td>
+<td class=3D"confluenceTd"><p align=3D"center">16:10:20</p></td>
+<td class=3D"confluenceTd"><p align=3D"center">16:09:50</p></td>
+<td class=3D"confluenceTd"><p align=3D"center">16:09:20</p></td>
+<td class=3D"confluenceTd"><p align=3D"center">16:08:50</p></td>
+<td class=3D"confluenceTd"><p align=3D"center">16:08:20</p></td>
+<td class=3D"confluenceTd"><p align=3D"center">16:07:50</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd"><p align=3D"center">15</p></td>
+<td class=3D"confluenceTd"><p align=3D"center">8</p></td>
+<td class=3D"confluenceTd"><p align=3D"center">11</p></td>
+<td class=3D"confluenceTd"><p align=3D"center">17</p></td>
+<td class=3D"confluenceTd"><p align=3D"center">9</p></td>
+<td class=3D"confluenceTd"><p align=3D"center">4</p></td>
+<td class=3D"confluenceTd"><p align=3D"center">7</p></td>
+<td class=3D"confluenceTd"><p align=3D"center">12</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p align=3D"left">1=E3=80=81=E8=A7=A6=E5=8F=91=E5=99=A8=E8=A1=A8=E8=BE=BE=
+=E5=BC=8F=E4=B8=BA{Zabbix server.cpu.used.per.core.[cpu0].last()}&gt;10=EF=
+=BC=8C=E6=AD=A4=E6=97=B6=E7=9A=84=E7=8A=B6=E6=80=81=E6=98=AF=EF=BC=9F</p>
+<p align=3D"left">=E7=AD=94=EF=BC=9A=E6=AD=A4=E6=97=B6=E7=9A=84=E7=8A=B6=E6=
+=80=81=E6=98=AF=E6=95=85=E9=9A=9C=EF=BC=8C=E5=9B=A0=E4=B8=BAlast()=E4=BB=A3=
+=E8=A1=A8=E7=9A=84=E6=98=AF=E4=BB=A5=E5=BD=93=E5=89=8D=E6=97=B6=E9=97=B4=E4=
+=B8=BA=E7=BB=93=E6=9D=9F=E5=9F=BA=E5=87=86=E7=9A=84=E6=9C=80=E5=90=8E=E4=B8=
+=80=E6=AC=A1=E5=8F=96=E5=80=BC=EF=BC=8C=E8=BF=99=E4=B8=AA=E5=80=BC=E6=98=AF=
+15=EF=BC=8C15&gt;10=E4=B8=BA=E7=9C=9F=EF=BC=8C=E8=A7=A6=E5=8F=91Problem=E4=
+=BA=8B=E4=BB=B6=E3=80=82</p>
+<p align=3D"left">2=E3=80=81=E8=A7=A6=E5=8F=91=E5=99=A8=E8=A1=A8=E8=BE=BE=
+=E5=BC=8F=E4=B8=BA{Zabbix server.cpu.used.per.core.[cpu0].last(#2)}&gt;10=
+=EF=BC=8C=E6=AD=A4=E6=97=B6=E7=9A=84=E7=8A=B6=E6=80=81=E6=98=AF=EF=BC=9F</p=
+>
+<p align=3D"left">=E7=AD=94=EF=BC=9A=E6=AD=A4=E6=97=B6=E7=9A=84=E7=8A=B6=E6=
+=80=81=E6=98=AF=E6=81=A2=E5=A4=8D=E6=AD=A3=E5=B8=B8=EF=BC=8C=E5=9B=A0=E4=B8=
+=BAlast(#2)=E5=8F=96=E7=9A=84=E6=98=AF=E4=BB=A5=E7=8E=B0=E5=9C=A8=E6=97=B6=
+=E9=97=B4=E4=B8=BA=E7=BB=93=E6=9D=9F=E5=9F=BA=E5=87=86=E7=9A=84=E5=80=92=E6=
+=95=B0=E7=AC=AC=E4=BA=8C=E6=AC=A1=E5=8F=96=E5=80=BC=EF=BC=8C=E8=BF=99=E4=B8=
+=AA=E6=97=B6=E9=97=B4=E6=98=AF16:10:50=EF=BC=8C=E5=80=BC=E6=98=AF8=EF=BC=8C=
+8&gt;10=E4=B8=BA=E5=81=87=EF=BC=8C=E8=A7=A6=E5=8F=91OK=E4=BA=8B=E4=BB=B6=EF=
+=BC=8C=E6=95=85=E9=9A=9C=E6=81=A2=E5=A4=8D=E6=AD=A3=E5=B8=B8=E3=80=82</p>
+<p align=3D"left">3=E3=80=81=E8=A7=A6=E5=8F=91=E5=99=A8=E8=A1=A8=E8=BE=BE=
+=E5=BC=8F{Zabbix server.cpu.used.per.core.[cpu0].last(#2,2m)}&gt;10=EF=BC=
+=8C=E6=AD=A4=E6=97=B6=E7=9A=84=E7=8A=B6=E6=80=81=E6=98=AF=EF=BC=9F</p>
+<p align=3D"left">=E7=AD=94=EF=BC=9A=E6=AD=A4=E6=97=B6=E7=9A=84=E7=8A=B6=E6=
+=80=81=E6=98=AF=E6=AD=A3=E5=B8=B8=E7=9A=84=E3=80=82=E5=9B=A0=E4=B8=BAlast(#=
+2,2m)=E5=8F=96=E7=9A=84=E6=98=AF16:08:50=E7=9A=84=E5=80=BC=EF=BC=8C=E8=BF=
+=99=E4=B8=AA=E5=80=BC=E6=98=AF4</p>
+<p align=3D"left">4=E3=80=81=E6=88=91=E6=83=B3=E5=8F=AA=E8=A6=81=E6=9C=80=
+=E8=BF=91=E4=B8=A4=E5=88=86=E9=92=9F=E7=9A=84=E5=80=BC=E4=BB=BB=E4=BD=95=E4=
+=B8=80=E4=B8=AA=E5=A4=A7=E4=BA=8E10=E5=B0=B1=E8=A7=A6=E5=8F=91=E6=95=85=E9=
+=9A=9C=EF=BC=8C=E8=A1=A8=E8=BE=BE=E5=BC=8F=E5=BA=94=E8=AF=A5=E6=98=AF=E6=80=
+=8E=E6=A0=B7=E7=9A=84=EF=BC=9F=E6=A0=B9=E6=8D=AE=E8=BF=99=E4=B8=AA=E8=A1=A8=
+=E8=BE=BE=E5=BC=8F=E5=88=A4=E6=96=AD=E7=8E=B0=E5=9C=A8=E7=9A=84=E7=8A=B6=E6=
+=80=81=E6=98=AF=E4=BB=80=E4=B9=88=EF=BC=9F</p>
+<p align=3D"left">=E7=AD=94=EF=BC=9A{Zabbix server.cpu.used.per.core.[cpu0]=
+.max(2m)}&gt;10=EF=BC=8C=E7=8E=B0=E5=9C=A8=E7=8A=B6=E6=80=81=E6=98=AFProble=
+m</p>
+<p align=3D"left">5=E3=80=81=E5=A6=82=E6=9E=9C=E6=88=91=E6=83=B3=E6=9C=80=
+=E8=BF=91=E4=B8=A4=E5=88=86=E9=92=9F=E7=9A=84=E5=B9=B3=E5=9D=87=E5=80=BC=E5=
+=A4=A7=E4=BA=8E10=E5=B0=B1=E8=A7=A6=E5=8F=91=E6=95=85=E9=9A=9C=EF=BC=8C=E8=
+=A1=A8=E8=BE=BE=E5=BC=8F=E5=BA=94=E8=AF=A5=E6=98=AF=E6=80=8E=E6=A0=B7=E7=9A=
+=84=EF=BC=9F=E6=A0=B9=E6=8D=AE=E8=BF=99=E4=B8=AA=E8=A1=A8=E8=BE=BE=E5=BC=8F=
+=E5=88=A4=E6=96=AD=E7=8E=B0=E5=9C=A8=E7=9A=84=E7=8A=B6=E6=80=81=E6=98=AF=E4=
+=BB=80=E4=B9=88=EF=BC=9F</p>
+<p align=3D"left">=E7=AD=94=EF=BC=9A{Zabbix server.cpu.used.per.core.[cpu0]=
+.avg(2m)}&gt;10=EF=BC=8C=E7=8E=B0=E5=9C=A8=E7=8A=B6=E6=80=81=E6=98=AFProble=
+m</p>
+<p align=3D"left">6=E3=80=81=E6=88=91=E6=83=B3=E6=9C=80=E8=BF=91=E4=B8=A4=
+=E5=88=86=E9=92=9F=E7=9A=84=E6=9C=80=E5=B0=8F=E5=80=BC=E5=B0=8F=E4=BA=8E10=
+=E5=B0=B1=E6=81=A2=E5=A4=8D=E6=AD=A3=E5=B8=B8=EF=BC=8C=E8=A1=A8=E8=BE=BE=E5=
+=BC=8F=E5=BA=94=E8=AF=A5=E6=98=AF=E6=80=8E=E6=A0=B7=E7=9A=84=EF=BC=9F</p>
+<p align=3D"left">=E7=AD=94=EF=BC=9A{Zabbix server.cpu.used.per.core.[cpu0]=
+.min(2m)}&gt;10</p>
+<p align=3D"left">7=E3=80=81=E5=A6=82=E6=9E=9C=E6=9C=80=E8=BF=91=E4=B8=A4=
+=E5=88=86=E9=92=9F=E6=9C=80=E5=A4=A7=E5=80=BC=E5=92=8C=E6=9C=80=E5=B0=8F=E5=
+=80=BC=E5=B7=AE=E5=BC=82=E5=A4=A7=E4=BA=8E10=E5=B0=B1=E8=A7=A6=E5=8F=91=E6=
+=95=85=E9=9A=9C=EF=BC=8C=E8=A1=A8=E8=BE=BE=E5=BC=8F=E5=BA=94=E8=AF=A5=E6=98=
+=AF=E6=80=8E=E6=A0=B7=E7=9A=84=EF=BC=9F=E6=A0=B9=E6=8D=AE=E8=BF=99=E4=B8=AA=
+=E8=A1=A8=E8=BE=BE=E5=BC=8F=E5=88=A4=E6=96=AD=E7=8E=B0=E5=9C=A8=E7=9A=84=E7=
+=8A=B6=E6=80=81=E6=98=AF=E4=BB=80=E4=B9=88=EF=BC=9F</p>
+<p align=3D"left">=E7=AD=94=EF=BC=9A{Zabbix server.cpu.used.per.core.[cpu0]=
+.delta(2m)}&gt;10=EF=BC=8C=E6=9C=80=E8=BF=91=E4=B8=A4=E5=88=86=E9=92=9F=E5=
+=86=85=E6=9C=80=E5=A4=A7=E5=80=BC=E6=98=AF17=EF=BC=8C=E6=9C=80=E5=B0=8F=E5=
+=80=BC=E6=98=AF8=EF=BC=8C=E5=B7=AE=E5=BC=82=E6=98=AF9=EF=BC=8C=E6=89=80=E4=
+=BB=A5=E7=8E=B0=E5=9C=A8=E7=8A=B6=E6=80=81=E6=98=AFOK</p>
+<p align=3D"left">8=E3=80=81=E5=A6=82=E6=9E=9C=E6=9C=80=E8=BF=91=E4=B8=A4=
+=E5=88=86=E9=92=9F=E6=9C=80=E5=A4=A7=E5=80=BC=E5=92=8C=E6=9C=80=E5=B0=8F=E5=
+=80=BC=E5=B7=AE=E5=BC=82=E5=A4=A7=E4=BA=8E8=E5=B0=B1=E8=A7=A6=E5=8F=91=E6=
+=95=85=E9=9A=9C=EF=BC=8C=E8=A1=A8=E8=BE=BE=E5=BC=8F=E5=BA=94=E8=AF=A5=E6=98=
+=AF=E6=80=8E=E6=A0=B7=E7=9A=84=EF=BC=9F=E6=A0=B9=E6=8D=AE=E8=BF=99=E4=B8=AA=
+=E8=A1=A8=E8=BE=BE=E5=BC=8F=E5=88=A4=E6=96=AD=E7=8E=B0=E5=9C=A8=E7=9A=84=E7=
+=8A=B6=E6=80=81=E6=98=AF=E4=BB=80=E4=B9=88=EF=BC=9F</p>
+<p align=3D"left">=E7=AD=94=EF=BC=9A{Zabbix server.cpu.used.per.core.[cpu0]=
+.delta(2m)}&gt;8=EF=BC=8C=E6=9C=80=E8=BF=91=E4=B8=A4=E5=88=86=E9=92=9F=E5=
+=86=85=E6=9C=80=E5=A4=A7=E5=80=BC=E6=98=AF17=EF=BC=8C=E6=9C=80=E5=B0=8F=E5=
+=80=BC=E6=98=AF8=EF=BC=8C=E5=B7=AE=E5=BC=82=E6=98=AF9=EF=BC=8C=E6=89=80=E4=
+=BB=A5=E7=8E=B0=E5=9C=A8=E7=8A=B6=E6=80=81=E6=98=AFProblem</p>
+<p align=3D"left">9=E3=80=81=E5=A6=82=E6=9E=9C=E6=88=91=E6=83=B3=E6=9C=80=
+=E8=BF=91=E4=B8=A4=E6=AC=A1=E7=9A=84=E5=B7=AE=E5=BC=82=E5=A4=A7=E4=BA=8E10=
+=E5=B0=B1=E8=A7=A6=E5=8F=91=E6=95=85=E9=9A=9C=EF=BC=8C=E8=A1=A8=E8=BE=BE=E5=
+=BC=8F=E5=BA=94=E8=AF=A5=E6=98=AF=E6=80=8E=E6=A0=B7=E7=9A=84=EF=BC=9F=E6=A0=
+=B9=E6=8D=AE=E8=BF=99=E4=B8=AA=E8=A1=A8=E8=BE=BE=E5=BC=8F=E5=88=A4=E6=96=AD=
+=E7=8E=B0=E5=9C=A8=E7=9A=84=E7=8A=B6=E6=80=81=E6=98=AF=E4=BB=80=E4=B9=88=EF=
+=BC=9F</p>
+<p align=3D"left">=E7=AD=94=EF=BC=9A{Zabbix server.cpu.used.per.core.[cpu0]=
+.delta(#2)}&gt;10=EF=BC=8C=E6=9C=80=E8=BF=91=E4=B8=A4=E6=AC=A1=E7=9A=84=E5=
+=80=BC=E6=98=AF15=EF=BC=8C8=EF=BC=8C=E5=B7=AE=E5=BC=82=E6=98=AF7=EF=BC=8C=
+=E6=89=80=E4=BB=A5=E7=8E=B0=E5=9C=A8=E7=8A=B6=E6=80=81=E6=98=AFOK</p>
+<p align=3D"left">10=E3=80=81=E5=A6=82=E6=9E=9C=E6=88=91=E6=83=B3=E6=9C=80=
+=E8=BF=913=E6=AC=A1=E7=9A=84=E5=B9=B3=E5=9D=87=E5=80=BC=E5=A4=A7=E4=BA=8E10=
+=E5=B0=B1=E8=A7=A6=E5=8F=91=E6=95=85=E9=9A=9C=EF=BC=8C=E8=A1=A8=E8=BE=BE=E5=
+=BC=8F=E5=BA=94=E8=AF=A5=E6=98=AF=E6=80=8E=E6=A0=B7=E7=9A=84=EF=BC=9F=E6=A0=
+=B9=E6=8D=AE=E8=BF=99=E4=B8=AA=E8=A1=A8=E8=BE=BE=E5=BC=8F=E5=88=A4=E6=96=AD=
+=E7=8E=B0=E5=9C=A8=E7=9A=84=E7=8A=B6=E6=80=81=E6=98=AF=E4=BB=80=E4=B9=88=EF=
+=BC=9F</p>
+<p align=3D"left">=E7=AD=94=EF=BC=9A{Zabbix server.cpu.used.per.core.[cpu0]=
+.avg(#3)}&gt;10=EF=BC=8C=E6=9C=80=E8=BF=91=E4=B8=89=E6=AC=A1=E7=9A=84=E5=80=
+=BC=E6=98=AF15=EF=BC=8C8=EF=BC=8C11=EF=BC=8C=E5=B9=B3=E5=9D=87=E5=80=BC=E6=
+=98=AF11.=E5=A4=9A=EF=BC=8C=E6=89=80=E4=BB=A5=E7=8E=B0=E5=9C=A8=E7=8A=B6=E6=
+=80=81=E6=98=AFProblem</p>
+<p align=3D"left">=E6=80=BB=E7=BB=93=EF=BC=9A=E5=83=8Flast,avg,max,min,delt=
+a,sum=E9=83=BD=E6=98=AF=E5=8F=AF=E4=BB=A5=E6=9C=89=E4=B8=A4=E4=B8=AA=E5=8F=
+=82=E6=95=B0=EF=BC=8C=EF=BC=88sec|#num,&lt;time_shift&gt;=EF=BC=89=EF=BC=8C=
+=E7=AC=AC=E4=B8=80=E4=B8=AA=E5=8F=82=E6=95=B0=E6=98=AF=E6=8C=87=E5=AE=9A=E8=
+=A6=81=E5=8F=96=E5=93=AA=E4=B8=AA=E8=8C=83=E5=9B=B4=E7=9A=84=E5=80=BC=EF=BC=
+=8C=E7=AC=AC=E4=BA=8C=E4=B8=AA=E5=8F=82=E6=95=B0=E6=98=AF=E6=8C=87=E6=97=B6=
+=E9=97=B4=E5=81=8F=E7=A7=BB=EF=BC=8C=E6=8C=87=E5=81=8F=E7=A7=BB=E5=A4=9A=E5=
+=B0=91=E6=97=B6=E9=97=B4=E5=90=8E=E7=AC=AC=E4=B8=80=E4=B8=AA=E5=8F=82=E6=95=
+=B0=E8=8C=83=E5=9B=B4=E5=86=85=E7=9A=84=E5=80=BC=E3=80=82=E4=B8=80=E8=88=AC=
+=E7=94=A8=E4=B8=80=E4=B8=AA=E5=8F=82=E6=95=B0=EF=BC=8C=E4=B8=A4=E4=B8=AA=E5=
+=8F=82=E6=95=B0=E4=B8=80=E8=B5=B7=E7=94=A8=E7=9A=84=E5=BF=85=E8=BE=83=E5=B0=
+=91=EF=BC=8C=E6=B2=A1=E4=BB=80=E4=B9=88=E6=84=8F=E4=B9=89=EF=BC=8C=E5=81=8F=
+=E7=A7=BB=E5=90=8E=E7=9A=84=E6=97=B6=E9=97=B4=E6=95=B0=E6=8D=AE=E9=83=BD=E6=
+=98=AF=E6=97=A7=E6=95=B0=E6=8D=AE=E3=80=82=E6=8B=BFlast=E4=B8=BA=E4=BE=8B=
+=EF=BC=8C=E5=B8=B8=E7=94=A8=E7=9A=84=E6=98=AFlast(),=E6=8B=BFavg=E4=B8=BA=
+=E4=BE=8B=EF=BC=8C=E5=B8=B8=E7=94=A8=E7=9A=84=E6=98=AFavg(2m),avg(#2)=E8=BF=
+=99=E7=A7=8D=E7=B1=BB=E5=9E=8B=EF=BC=8C=E5=83=8Favg(#2,2m)=E6=88=96avg(1h,1=
+d)=E8=BF=99=E7=A7=8D=E7=94=A8=E6=B3=95=E8=BF=98=E6=98=AF=E6=AF=94=E8=BE=83=
+=E5=B0=91=E7=9A=84=E3=80=82=E8=BF=98=E6=9C=89=E6=9C=89=E4=BA=9B=E6=83=85=E5=
+=86=B5=E6=9C=80=E5=A5=BD=E8=BF=98=E6=98=AF=E5=86=99=E4=B8=80=E4=B8=8B=E6=81=
+=A2=E5=A4=8D=E8=A1=A8=E8=BE=BE=E5=BC=8F=EF=BC=8C=E8=BF=99=E6=A0=B7=E8=83=BD=
+=E6=9B=B4=E5=87=86=E7=9A=84=E5=88=A4=E6=96=AD=E7=8A=B6=E6=80=81=E7=9A=84=E5=
+=8F=98=E5=8C=96=E3=80=82=E6=AF=94=E5=A6=82=E6=8B=BFcpu=E4=BD=BF=E7=94=A8=E7=
+=8E=87=E6=9D=A5=E8=AF=B4=EF=BC=8C=E6=AD=A3=E5=B8=B8CPU=E4=BD=BF=E7=94=A8=E7=
+=8E=8720=E5=B7=A6=E5=8F=B3=EF=BC=8C=E5=81=87=E8=AE=BE=E6=88=9130=E7=A7=92=
+=E5=8F=96=E4=B8=80=E6=AC=A1=E6=95=B0=E6=8D=AE=EF=BC=8C=E6=9C=80=E8=BF=91=E4=
+=B8=A4=E5=88=86=E9=92=9F=E5=85=B1=E5=9B=9B=E6=AC=A1=E6=95=B0=E6=8D=AE=EF=BC=
+=8C=E5=88=86=E5=88=AB=E6=98=AF81=EF=BC=8C82=EF=BC=8C80=EF=BC=8C78=E3=80=82=
+=E8=A7=A6=E5=8F=91=E8=A1=A8=E8=BE=BE=E5=BC=8F=E6=98=AFavg(2m)&gt;80=EF=BC=
+=8C=E6=81=A2=E5=A4=8D=E8=A1=A8=E8=BE=BE=E5=BC=8F=E6=B2=A1=E6=9C=89=E3=80=82=
+=E6=AD=A4=E6=97=B6=E5=B9=B3=E5=9D=87=E5=80=BC=E6=98=AF80.25=EF=BC=8C80.25&g=
+t;80=EF=BC=8C=E7=BB=93=E6=9E=9C=E4=B8=BA=E7=9C=9F=EF=BC=8C=E8=A7=A6=E5=8F=
+=91Problem=E4=BA=8B=E4=BB=B6=E3=80=82=E5=86=8D=E8=BF=8730=E7=A7=92=EF=BC=8C=
+=E5=8F=88=E5=8F=96=E5=88=B0=E4=B8=80=E4=B8=AA=E5=80=BC77=EF=BC=8C=E6=AD=A4=
+=E6=97=B6=E6=8C=89=E6=9C=80=E8=BF=91=E4=B8=BA=E5=85=88=E7=9A=84=E5=8E=9F=E5=
+=88=99=EF=BC=8C=E5=80=BC=E7=9A=84=E6=8E=92=E5=88=9777=EF=BC=8C81=EF=BC=8C82=
+=EF=BC=8C80=EF=BC=8C78=E3=80=82=E6=9C=80=E8=BF=912=E5=88=86=E9=92=9F=E7=9A=
+=84=E6=95=B0=E6=8D=AE=E6=98=AF77=EF=BC=8C81=EF=BC=8C82=EF=BC=8C80=EF=BC=8C=
+=E5=B9=B3=E5=9D=87=E5=80=BC=E6=98=AF80=EF=BC=8C80&gt;80=E4=B8=BA=E5=81=87=
+=EF=BC=8C=E8=A7=A6=E5=8F=91OK=E4=BA=8B=E4=BB=B6=EF=BC=8C=E6=AD=A4=E6=97=B6=
+=E4=BD=BF=E7=94=A8=E7=8E=87=E4=BB=8D=E7=84=B6=E9=AB=98=E8=BE=BE80=EF=BC=8C=
+=E4=BD=86=E6=98=AF=E5=AE=83=E5=8D=B4=E8=AE=A4=E4=B8=BA=E6=95=85=E9=9A=9C=E6=
+=81=A2=E5=A4=8D=E4=BA=86=EF=BC=8C=E8=BF=99=E6=98=BE=E7=84=B6=E6=98=AF=E4=B8=
+=8D=E5=8F=AF=E5=8F=96=E7=9A=84=EF=BC=8C=E5=A6=82=E6=9E=9C=E6=88=91=E5=9C=A8=
+=E6=81=A2=E5=A4=8D=E8=A1=A8=E8=BE=BE=E5=BC=8F=E4=B8=8A=E5=86=99=E4=B8=8Aavg=
+(2m)&lt;30=EF=BC=8C=E9=82=A3=E6=AD=A4=E6=97=B6=E5=AE=83=E4=BC=9A=E5=88=A4=
+=E6=96=AD=E4=B8=A4=E4=B8=AA=E8=A1=A8=E8=BE=BE=E5=BC=8F=EF=BC=8C80&gt;80=E4=
+=B8=BA=E5=81=87=EF=BC=8C=E4=B8=8D=E4=BC=9A=E8=A7=A6=E5=8F=91=E6=95=85=E9=9A=
+=9C=EF=BC=8C80&lt;30=E4=B8=BA=E5=81=87=EF=BC=8C=E8=A1=A8=E7=A4=BA=E6=B2=A1=
+=E6=9C=89=E6=81=A2=E5=A4=8D=EF=BC=8C=E6=AD=A4=E6=97=B6=E7=8A=B6=E6=80=81=E4=
+=BB=8D=E7=84=B6=E6=98=AFProblem=EF=BC=8C=E5=9B=A0=E4=B8=BA=E5=89=8D=E4=B8=
+=80=E4=B8=AA=E7=8A=B6=E6=80=81=E6=98=AFProblem=EF=BC=8C=E7=8E=B0=E5=9C=A8=
+=E5=81=9A=E7=9A=84=E4=B8=A4=E4=B8=AA=E5=88=A4=E6=96=AD=E9=83=BD=E6=B2=A1=E6=
+=94=B9=E5=8F=98=E4=BB=80=E4=B9=88=EF=BC=8C=E6=89=80=E4=BB=A5=E7=BB=B4=E6=8C=
+=81=E5=8E=9F=E7=8A=B6=E6=80=81=E3=80=82=E5=A5=BD=E5=A4=84=E6=98=AF=E5=8F=AA=
+=E6=9C=89=E5=BD=93=E4=BD=BF=E7=94=A8=E7=8E=87=E8=B6=8B=E4=BA=8E=E5=B9=B3=E8=
+=A1=A1=E4=B8=94=E7=9C=9F=E7=9A=84=E8=BE=83=E4=BD=8E=E6=97=B6=E6=89=8D=E6=8A=
+=A5=E5=91=8A=E6=81=A2=E5=A4=8D=EF=BC=8C=E7=BC=BA=E7=82=B9=E6=98=AF=E5=BD=93=
+=E9=97=AE=E9=A2=98=E6=81=A2=E5=A4=8D=E6=97=B6=E4=B8=8D=E8=83=BD=E5=BF=AB=E9=
+=80=9F=E7=9A=84=E8=BD=AC=E6=8D=A2=E7=8A=B6=E6=80=81=E3=80=82=E6=8A=98=E4=B8=
+=AD=E5=8A=9E=E6=B3=95=E5=B0=B1=E6=98=AF=E9=99=8D=E4=BD=8E=E5=8F=96=E5=B9=B3=
+=E5=9D=87=E7=9A=84=E6=97=B6=E9=97=B4=E6=88=96=E6=AC=A1=E6=95=B0=EF=BC=8C=E6=
+=88=96=E8=80=85=E5=A4=9A=E6=9D=A1=E4=BB=B6=E5=88=A4=E6=96=AD=E3=80=82=E5=A6=
+=82=E6=9E=9C=E5=AF=B9=E8=BF=99=E4=BA=9B=E7=BB=86=E8=8A=82=E6=97=A0=E6=89=80=
+=E8=B0=93=E9=82=A3=E7=94=A8=E4=BB=80=E4=B9=88=E6=96=B9=E6=B3=95=E9=83=BD=E6=
+=98=AF=E5=8F=AF=E4=BB=A5=E7=9A=84</p>
+<p>&nbsp;</p>
+    </div>
+</body>
+</html>
+------=_Part_29837_1443555332.1548234179860--

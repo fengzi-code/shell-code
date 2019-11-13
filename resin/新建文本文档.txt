@@ -1,0 +1,40 @@
+http://caucho.com/download/resin-4.0.54.tar.gz
+
+./configure --prefix=/usr/local/resin --with-java-home=$JAVA_HOME --enable-64bit
+
+先简要介绍下Resin启动服务之后，一般会存在这几个端口： 
+1、 WatchDog（监听狗 哈哈）端口， 默认：6600 
+2、Server监听端口，默认：6800 
+3、应用的Http端口（可自定义），默认：8080 
+说明：单个Resin不管同时配置几个应用，每次启动Resin之后，只会启动一个WatchDog监听，kill掉WatchDog后，所有的实例都会停止，WatchDog运行中，kill掉某个实例后，该实例会自动重启。
+
+
+优化建议
+过增大 “-XX：PermSize”和“-XX：MaxPermSize”这两个参数来避免出现JVM内存永久保存区域溢出引发Resin的500错误。
+因为线上用了spring+struts，这些框架用到大量动态class，ClassLoader是把这部分内存放在PermGen space里的。而JVM的GC是不会清理PermGen space的。这样容易导致线上应用报告PermGen space内存溢出。
+Server端JVM最好将-Xms和-Xmx设为相同值。为了优化GC，最好让-Xmn值约等于-Xmx的1/4。
+
+
+
+
+<server-default>
+
+    <jvm-arg>-Xms1024m</jvm-arg>
+
+    <jvm-arg>-Xmx1024m</jvm-arg>
+
+    <jvm-arg>-Xmn256m</jvm-arg>
+
+    <jvm-arg>-XX:PermSize=128m</jvm-arg>
+
+<jvm-arg>-XX:MaxPermSize=256m</jvm-arg>
+
+    <thread-max>1024</thread-max>
+
+    <socket-timeout>30s</socket-timeout>
+
+    <keepalive-max>512</keepalive-max>
+
+    <keepalive-timeout>60s</keepalive-timeout>
+
+</server-default>

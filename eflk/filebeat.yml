@@ -1,0 +1,231 @@
+###################### Filebeat Configuration Example #########################
+
+# This file is an example configuration file highlighting only the most common
+# options. The filebeat.full.yml file from the same directory contains all the
+# supported options with more comments. You can use it as a reference.
+#
+# You can find the full configuration reference here:
+# https://www.elastic.co/guide/en/beats/filebeat/index.html
+
+
+
+#========================= Filebeat global options ============================
+# Event count spool threshold - forces network flush if exceeded
+filebeat.spool_size: 2048
+
+# Enable async publisher pipeline in filebeat (Experimental!)
+#filebeat.publish_async: false
+
+# Defines how often the spooler is flushed. After idle_timeout the spooler is
+# Flush even though spool_size is not reached.
+filebeat.idle_timeout: 3s
+
+# Name of the registry file. If a relative path is used, it is considered relative to the
+# data path.
+filebeat.registry_file: ${path.data}/registry
+
+#filebeat.config_dir:
+
+
+#=========================== Filebeat prospectors =============================
+
+filebeat.prospectors:
+
+# Each - is a prospector. Most options can be set at the prospector level, so
+# you can use different prospectors for various configurations.
+# Below are the prospector specific configurations.
+
+filebeat.prospectors:
+- input_type: log
+  document_type: syslog
+  tail_files: true
+  paths:
+    - /var/log/*
+  tags: ["syslog"]
+  fields: 
+    mzj-types: system-syslog
+
+- input_type: log
+  document_type: mzj-java
+  tail_files: true
+  paths:
+    - /home/eagle/log/*/*.log
+    - /home/eagle/eagle-services/eagle-ad/log/eagle-*.log
+    - /home/eagle/eagle-services/eagle-els/log/eagle-*.log
+    - /home/eagle/eagle-services/eagle-health/log/eagle-*.log
+    - /home/eagle/eagle-services/eagle-heartbeat/log/eagle-*.log
+    - /home/eagle/eagle-services/eagle-mapapi/log/eagle-*.log
+    - /home/eagle/eagle-services/eagle-oss/log/eagle-*.log
+    - /home/eagle/eagle-services/eagle-sysmanager/log/eagle-*.log
+    - /home/eagle/eagle-services/eagle-wxapi/log/eagle-*.log
+    - /home/eagle/eagle-services/eagle-wxmanager/log/eagle-*.log
+    - /home/eagle/eagle-services/eagle-wxuser/log/eagle-*.log
+    - /home/eagle/eagle-services/eagle-wxuserinfo/log/eagle-*.log
+  tags: ["eagle-service-log"]
+  fields:
+    mzj-java: java-eagle-service-log
+  multiline.pattern: '^[0-2][0-9]:[0-5][0-9]:[0-5][0-9]'
+  multiline.negate: true
+  multiline.match: after 
+  multiline.max_lines: 100
+  multiline.timeout: 60
+
+- input_type: log
+  document_type: mzj-java
+  tail_files: true
+  paths:
+    - /home/eagle/eagle-gateway/config-server/log/config-server.log
+    - /home/eagle/eagle-gateway/eureka/log/eureka.log
+    - /home/eagle/eagle-gateway/zipkin/log/zipkin.log
+    - /home/eagle/eagle-gateway/zuul/log/zuul.log
+  tags: ["eagle-gateway-log"]
+  fields:
+    mzj-java: java-eagle-gateway-log
+  multiline.pattern: '^[0-2][0-9]:[0-5][0-9]:[0-5][0-9]'
+  multiline.negate: true
+  multiline.match: after
+  multiline.max_lines: 1000
+  multiline.timeout: 60
+  
+- input_type: log
+  document_type: mzj-java
+  tail_files: true
+  paths:
+    - /home/eagle/eagle-web/wechart-portal2/log/mzj-portal2.log
+  tags: ["eagle-web-log"]
+  fields:
+    mzj-java: java-eagle-web-log
+  multiline.pattern: '^[0-2][0-9]:[0-5][0-9]:[0-5][0-9]'
+  multiline.negate: true
+  multiline.match: after
+  multiline.max_lines: 1000
+  multiline.timeout: 60
+  
+- input_type: log
+  document_type: mzj-java
+  tail_files: true
+  paths:
+    - /home/eagle/new-media/log/*
+  tags: ["new-media"]
+  fields:
+    mzj-java: java-eagle-new-media
+  multiline.pattern: '^[0-2][0-9]:[0-5][0-9]:[0-5][0-9]'
+  multiline.negate: true
+  multiline.match: after
+  multiline.max_lines: 1000
+  multiline.timeout: 60
+
+- input_type: log
+  document_type: nginx_access
+  tail_files: true
+  paths:
+    - /var/log/nginx/*access.log
+  tags: ["nginx-acc-log"]
+  fields:
+    mzj-ngx: nginx_access
+
+- input_type: log
+  document_type: nginx_error
+  tail_files: true
+  paths:
+    - /var/log/nginx/*error.log
+  tags: ["nginx-err-log"]
+  fields:
+    mzj-ngx: nginx_error
+
+    #- c:\programdata\elasticsearch\logs\*
+
+  # Exclude lines. A list of regular expressions to match. It drops the lines that are
+  # matching any regular expression from the list.
+  #exclude_lines: ["^DBG"]
+
+  # Include lines. A list of regular expressions to match. It exports the lines that are
+  # matching any regular expression from the list.
+  #include_lines: ["^ERR", "^WARN"]
+
+  # Exclude files. A list of regular expressions to match. Filebeat drops the files that
+  # are matching any regular expression from the list. By default, no files are dropped.
+  #exclude_files: [".gz$"]
+
+  # Optional additional fields. These field can be freely picked
+  # to add additional information to the crawled log files for filtering
+  #fields:
+  #  level: debug
+  #  review: 1
+
+  ### Multiline options
+
+  # Mutiline can be used for log messages spanning multiple lines. This is common
+  # for Java Stack Traces or C-Line Continuation
+
+  # The regexp Pattern that has to be matched. The example pattern matches all lines starting with [
+  #multiline.pattern: ^\[
+
+  # Defines if the pattern set under pattern should be negated or not. Default is false.
+  #multiline.negate: false
+
+  # Match can be set to "after" or "before". It is used to define if lines should be append to a pattern
+  # that was (not) matched before or after or as long as a pattern is not matched based on negate.
+  # Note: After is the equivalent to previous and before is the equivalent to to next in Logstash
+  #multiline.match: after
+
+
+#================================ General =====================================
+
+# The name of the shipper that publishes the network data. It can be used to group
+# all the transactions sent by a single shipper in the web interface.
+#name:
+
+# The tags of the shipper are included in their own field with each
+# transaction published.
+#tags: ["service-X", "web-tier"]
+
+# Optional fields that you can specify to add additional information to the
+# output.
+#fields:
+#  env: staging
+
+#================================ Outputs =====================================
+
+# Configure what outputs to use when sending the data collected by the beat.
+# Multiple outputs may be used.
+
+#-------------------------- Elasticsearch output ------------------------------
+#output.elasticsearch:
+  # Array of hosts to connect to.
+#  hosts: ["172.18.197.160:9200"]
+
+  # Optional protocol and basic auth credentials.
+  #protocol: "https"
+  #username: "elastic"
+  #password: "changeme"
+
+#----------------------------- Logstash output --------------------------------
+output.logstash:
+  # The Logstash hosts
+#  hosts: ["172.18.197.160:5044"]
+  hosts: ["kibana.mzjmedia.com:5044"]
+  loadbalance: true
+  compression_level: 6
+
+  # Optional SSL. By default is off.
+  # List of root certificates for HTTPS server verifications
+  #ssl.certificate_authorities: ["/etc/pki/root/ca.pem"]
+  ssl.certificate_authorities: ["/etc/pki/tls/certs/logstash-forwarder.crt"]
+
+  # Certificate for SSL client authentication
+  #ssl.certificate: "/etc/pki/client/cert.pem"
+
+  # Client Certificate Key
+  #ssl.key: "/etc/pki/client/cert.key"
+
+#================================ Logging =====================================
+
+# Sets log level. The default log level is info.
+# Available log levels are: critical, error, warning, info, debug
+logging.level: warning
+
+# At debug level, you can selectively enable logging only for some components.
+# To enable all selectors use ["*"]. Examples of other selectors are "beat",
+# "publish", "service".
+#logging.selectors: ["*"]

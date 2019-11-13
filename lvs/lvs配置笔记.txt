@@ -1,0 +1,42 @@
+lvs-net模式
+1.打开路由转发功能
+vim /etc/sysctl.conf
+改: net.ipv4.ip_forward=0 为1 centos 6
+
+centos7添加
+
+net.ipv4.ip_forward=1
+net.ipv4.conf.all.rp_filter=0
+net.ipv4.conf.default.rp_filter=0
+让配置生效 sysctl -p
+
+2.配置网络环境
+添加两张网卡
+ eth0 192.168.1.122   模拟公网IP
+ eth0 192.168.2.122   内网IP
+
+3.安装ipvsadm
+yum install ipvsadm
+
+4.配置ipvsadm
+
+ipvsadm -A -t 192.168.1.222:80 -s rr
+添加一条规则 访问公网IP后进行轮循转发
+-A 添加
+-t tcp服务  ip:port
+-s 算法 rr 轮循
+
+ipvsadm -a -t 192.168.1.222:80 -r 192.168.2.123:80 -m
+ipvsadm -a -t 192.168.1.222:80 -r 192.168.2.124:80 -m
+
+-r 指定转发到的IP地址
+－m 表示NAT方式的LVS
+
+/etc/init.d/ipvsadm save 保存
+ipvsadm -S 保存
+
+5.在2.123 和2.123的IP进行配置
+
+
+
+

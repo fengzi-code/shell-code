@@ -1,0 +1,227 @@
+iptables安装在内核中的tcp协议站上
+
+iptables：用户空间的应用程序，用于编写规则的接口；另外一层意思是内核模块里存放规则的地方也叫iptables；iptables分开的意思就是ip+tables,就是ip和表，存储ip相关的规则和表；
+netfilter：kernel，内核中的代码，hooks function：钩子函数,它作为一个通用的,抽象的框架，提供一整套的hook函数的管理机制,使得诸如数据包过滤、网络地址转换(NAT)和基于协议类型的连接跟踪成为了能。
+
+ netfilter内置的五个钩子,内置链：与钩子函数一一对应；
+            prerouting：路由前，数据报文刚到达本机还没有路由的；
+            input：路由完之后，要到达本机内部来的；
+            forward：不到本机内部的，经由本机转发的；
+            output：由本机内部向外发出的；
+            postrouting：即将发出去，马上要离开本机网卡的报文；
+
+防火墙框架 3个流经的位置 设置勾子函数
+
+  报文流向：
+
+            流入本机：prerouting-->input==>用户空间进程；接收地址为本机,数据发往本机的用户空间
+            流出本机：用户空间进程==>output-->postrouting;用户空间通过tcp协议站发送到非本机接收地址
+            转发：prerouing-->forward-->postrouting,接收地址不为本机,报文通过内核转发到其它地址,不经过用户空间
+
+netfilter功能：4表（table）;
+            filter：过滤，防火墙；作用链(output：由本机内部向外发出的,input：路由完之后，要到达本机内部来的,forward：不到本机内部的，经由本机转发的)
+            mangle：拆解报文，按需修改；作用链(所有链)
+            nat：network address translation;网络地址转换(IP层、传输层地址)；作用链(prerouting：路由前，数据报文刚到达本机还没有路由的,output：由本机内部向外发出的,postrouting：即将发出去，马上要离开本机网卡的报文)
+            raw：关闭在nat表上启用的连接追踪机制；作用链(prerouting：路由前，数据报文刚到达本机还没有路由的,output：由本机内部向外发出的)
+        iptables：iptables编写的规则将应用在netfilter上的钩子函数上面；
+            内置链：与钩子函数一一对应；5链
+                PREROUTING
+                INPUT
+                FORWARD
+                OUTPUT
+                POSTROUING
+            用户自定义链：用于内置链进行补充扩展。报文不会经过自定义链,只能在内置链上通过规则引用后生效;
+
+        表和链的对应关系，及优先级（由高到底：raw-->mangle-->nat-->filter）;
+        链上规则次序,顺序自上而下:
+        1. 同类规则(访问同一应用),匹配范围小的放上面
+        2. 不同类规则(访问不同应用),匹配到报文频率较大的放上面
+        3. 可由一条规则描述的多个规则合并为一个
+        4. 设置默认策略(白名单)
+
+
+
+
+
+
+
+匹配条件：因为iptables是网络层的防火墙、他只能匹配协议、IP、TCP、UDP、ICMP、匹配条件肯定是根据底层的IP报文来检查
+    基本匹配:
+    -s IP：匹配源IP的、可以是IP也可以是网络地址、可以取反、用！号取反
+    -d IP：匹配目标地址的
+    -p Proctol：匹配协议的[TCP|UDP|ICMP]、三者之一
+    -i：数据报文流入的接口、数据包从哪个网卡进来、通常只用于INPUT、FORWARD、PRERUTING
+    -o：数据报文流出的接口、OUTPUT、FORWARD、POSTROUTING
+    扩展匹配:
+        隐含扩展：当使用-p指定某一协议之后,可省略-m 选项
+                 -p tcp、后面可以指定端口
+                 --dport m[-n]:目标端口、m[-n]可以使用一片连续的端口、还可以在前面用！号取反 
+                 --sport:源端口、这个跟上面的一样
+                 --tcp-flags list1 list2:tcp的标志位匹配,检查list1所指明的所有标志位,且这其中,list2的所有标示位必须为1,list1中其它的必须为0,没有在list1中的不作检查:
+                 syn,ack,fin,rst,psh,urg
+                   --tcp-flags SYN,ACK,FIN,RST SYN 表示只接受第一次握手的请求 
+
+        显式扩展：必须要明确指定的扩展模块 -m 扩展名称 --专用选项1 --专用选项2
+                multiport:多端口匹配、一次指定多个离散端口(一般不超过15个)
+                            --source-ports:源端口
+                            --destination-ports:指定目标商品端口
+                            --ports:指定多个端口、多个端口间用逗号隔开
+
+                iprange:ip地址匹配范围、我们可以匹配指定的IP段
+                            [!] --src-range from[to]：指定源地址范围
+                            [!] --dst-range from[to]：指定目标地址范围
+
+                time:指定时间范围
+                            --datestart YYYY[-MM[-DD[Thh[:mm[:ss]]]]]：指定开始日期                               
+                            --datestop YYYY[-MM[-DD[Thh[:mm[:ss]]]]]：指定结束日期
+                            --timestart hh:mm[:ss]：指定开始时间不指定日期
+                            --timestop hh:mm[:ss]：只指定结束时间不指定日期
+                            [!] --weekdays day[,day...]：指定周几的、"！"号取反
+
+                string:对字符串的匹配的、包含有指定的字符串时做相应的处理
+                            --algo {bm|kmp}：英文中的字符比较高效的比较
+                            --string "string":要查找的字符串
+                            --hex-string
+
+                connlimit:每IP对指定服务器的
+                            [!] --connlimit-above [n]
+
+                limit:报文速率控制
+                            --limit[/second|/minute|/hour|/day]每秒、每分、每小时、每天
+                            --limit-burst #:一批最多个数、峰值
+
+                state:状态匹配：
+                            --state：仅放行哪些连接的状态、也可以做状态连接追踪的。
+                            法则：
+                            1、对于进入状态为ESTABLISHED都应该放行
+                            2、对于出去的状态为ESTABLISHED都应该放行
+                            3、严格检查进入的状态为NEW的连接
+                            4、所有状态为INVALIED都应该拒绝
+
+
+
+iptables -t 表(省略时默认为filter) 子命令 作用链 规则 
+链管理:
+    -F: flush,清空链中的规则、规则有编号、在链中自上而下、从1开始 
+    -L：list,列出表中的所有规则
+           -n:数字格式显示IP和Port、如果不用-n、ip就会反解为主机名、端口反解成服务名、会很慢
+           -v:以详细格式显示     
+            -vv:更详细
+           -vvv:更更详细
+           -x:exactly,精确值、不执行单位换算
+           --line-numbers:显示各规则的行号    
+    -Z：zero,清零、把规则的计数器清零
+    -N: new,定义一条自定义的新链
+    -X: drop,删除一条用户自定义空的规则链
+    -P: Policy,为链指定默认策略,filter默认策略通常有 ACCEPT(充许),DROP(丢弃),REJECT(拒绝)
+    -E: rEname,为自定义链改名,引用计数器不为0的不能删除和改名
+    -A：append,附加一条规则、在规则的后面添加,通常使用匹配条件 -j 处理机制
+    -I: insert,在指定位置插入规则,省略为第1条位置
+    -D: delete,删除指定链上的指定规则
+    -R: replace,替换指定链上的指定规则
+   -p udp、udp只有端口
+       --dport
+        --sport
+    -p icmp (8是ping的请求、0是ping的响应)
+        --icmp-type
+    -j jump 跳转到指定的处理动作
+       REJECT    : 拒绝该数据包，并返回数据包通知对方，范例如下：
+                    iptables -A  INPUT -p TCP --dport 22 -j REJECT --reject-with ICMP echo-reply
+       DROP      : 丢弃数据包不予处理
+       REDIRECT  : 端口重定向,例如：
+                    iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT--to-ports 8081
+       MASQUERADE: 改写封包来源IP为防火墙的IP，可以指定port 对应的范围，进行完此处理动作后，直接跳往下一个规则链，不需指定要伪装成哪个 IP，IP 会从网卡直接读取，范例如下：
+                    iptables -t nat -A POSTROUTING -p TCP -j MASQUERADE --to-ports 21000-31000
+       LOG       : 将数据包相关信息纪录在 /var/log 中，详细位置请查阅 /etc/syslog.conf 配置文件，进行完此处理动作后，将会继续比对其它规则。例如：
+                    iptables -A INPUT -p tcp -j LOG --log-prefix "input packet"
+       SNAT      : 改写封包来源 IP 为某特定 IP 或 IP 范围，可以指定 port 对应的范围，进行完此处理动作后，将直接跳往下一个规则炼（mangle:postrouting）。范例如下：
+                    iptables -t nat -A POSTROUTING -p tcp -o eth0 -j SNAT --to-source 192.168.10.15-192.168.10.160:2100-3200
+       DNAT      : 改写数据包包目的地 IP 为某特定 IP 或 IP 范围，可以指定 port 对应的范围，进行完此处理动作后，将会直接跳往下一个规则链。范例如下：
+                    iptables -t nat -A PREROUTING -p tcp -d 15.45.23.67 --dport 80 -j DNAT --to-destination 192.168.10.1-192.168.10.10:80-100
+       MIRROR    : 镜像数据包，也就是将来源 IP与目的地IP对调后，将数据包返回，进行完此处理动作后，将会中断过滤程序。
+       QUEUE     : 中断过滤程序，将封包放入队列，交给其它程序处理。透过自行开发的处理程序，可以进行其它应用，例如：计算联机费用.......等。
+       RETURN    : 结束在目前规则链中的过滤程序，返回主规则链继续过滤，如果把自订规则炼看成是一个子程序，那么这个动作，就相当于提早结束子程序并返回到主程序中。
+       MARK      : 将封包标上某个代号，以便提供作为后续过滤的条件判断依据，进行完此处理动作后，将会继续比对其它规则。范例如下：
+                    iptables -t mangle -A PREROUTING -p tcp --dport 22 -j MARK --set-mark 22
+
+iptables -A INPUT -p tcp -m tcp --dport 21 -j ACCEPT  #添加filter表,开放21端口
+iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -j MASQUERADE     #添加nat表，将源地址是 192.168.10.0/24 的数据包进行地址伪装
+iptables -I INPUT 3 -p tcp -m tcp --dport 20 -j ACCEPT  #添加filter表，开放20端口，并且插入到指定位置
+iptables -t nat -vnL POSTROUTING --line-number    #查看nat表
+        pkts(报文数) bytes(字节数) target(处理目录)     prot(协议,一般三种) opt(选项) source(源地址范围) destination(目标地址范围)
+iptables -R INPUT 3 -j DROP    #将规则3改成DROP
+iptables -D INPUT 3  #删除input的第3条规则
+iptables -t nat -D POSTROUTING 1  #删除nat表中postrouting的第一条规则
+iptables -F INPUT   #清空 filter表INPUT所有规则
+iptables -P INPUT DROP  #设置filter表INPUT默认规则是 DROP
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dst 122.225.97.111 --dport 80 -j DNAT --to-destination 192.168.1.130:80 把所有通过eth0这个网卡发往地址122.225.97.111的包都转发到局域网的中192.168.1.130这台机器上.它也可以配全--string功能更强大
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -m string --string "img.51yip.com" --algo bm -j DNAT --to-destination 192.168.1.136:80
+将匹配到img.51yip.com的请求转到局域网的192.168.1.136这台机器上
+iptables -t nat -I POSTROUTING 1 -j SNAT -s 192.168.10.0/24 --to-destination 192.168.1.108
+snat可以让本地ip地址伪装成其他机器的ip地址,或者是公网IP,假如我有三台机器,一台能上外网,另外二台却不可以.不能上网的机器可以伪装成可上网的那机器的IP
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+查看版本： firewall-cmd --version
+查看帮助： firewall-cmd --help
+显示状态： firewall-cmd --state
+查看所有的zone信息: firewall-cmd --list-all-zones
+查看所有打开的端口： firewall-cmd --zone=public --list-ports
+更新防火墙规则： firewall-cmd --reload
+查看区域信息:  firewall-cmd --get-active-zones
+查看指定接口所属区域： firewall-cmd --get-zone-of-interface=eth0
+拒绝所有包：firewall-cmd --panic-on
+取消拒绝状态： firewall-cmd --panic-off
+查看是否拒绝： firewall-cmd --query-panic
+显示允许通过的服务: firewall-cmd --list-services
+查看所有永久放行的服务: firewall-cmd --get-service --permanent
+更新规则，不重启服务: firewall-cmd --reload
+更新规则，重启服务: firewall-cmd --complete-reload
+检查是否允许伪装IP: firewall-cmd --query-masquerade
+
+zone
+drop: 丢弃所有进入的包，而不给出任何响应
+block: 拒绝所有外部发起的连接，允许内部发起的连接
+public: 允许指定的进入连接
+external: 同上，对伪装的进入连接，一般用于路由转发
+dmz: 允许受限制的进入连接
+work: 允许受信任的计算机被限制的进入连接，类似 workgroup
+home: 同上，类似 homegroup
+internal: 同上，范围针对所有互联网用户
+trusted: 信任所有连接
+过滤规则
+
+source: 根据源地址过滤
+interface: 根据网卡过滤
+service: 根据服务名过滤
+port: 根据端口过滤
+icmp-block: icmp 报文过滤，按照 icmp 类型配置
+masquerade: ip 地址伪装
+forward-port: 端口转发
+rule: 自定义规则
+
+其中，过滤规则的优先级遵循如下顺序
+
+1.source
+2.interface
+3.firewalld.conf
+
+添加 smtp 服务至 work zone
+# firewall-cmd --zone=work --add-service=smtp
+移除 work zone 中的 smtp 服务
+# firewall-cmd --zone=work --remove-service=smtp
+转发 22 端口数据至另一 ip 的 2055 端口上
+# firewall-cmd --zone=public --add-forward-port=port=22:proto=tcp:toport=2055:toaddr=192.168.1.100
+IP 封禁
+firewall-cmd --permanent --add-rich-rule="rule family='ipv4' source address='222.222.222.222' reject"
+
+firewall-cmd --permanent --zone=public --query-port=80/tcp  #在public中永久开放80端口
+firewall-cmd --permanent --zone=public --add-rich-rule='rule family="ipv4" source address="192.168.0.4/24" service name="http" accept'    //设置某个ip访问某个服务
+firewall-cmd --permanent --zone=public --remove-rich-rule='rule family="ipv4" source address="192.168.0.4/24" service name="http" accept' //删除配置
+firewall-cmd --permanent --add-rich-rule 'rule family=ipv4 source address=192.168.0.1/2 port port=80 protocol=tcp accept'     //设置某个ip访问某个端口
+firewall-cmd --permanent --remove-rich-rule 'rule family=ipv4 source address=192.168.0.1/2 port port=80 protocol=tcp accept'     //删除配置
+--------------------- 
+
+在每次修改端口和服务后/etc/firewalld/zones/public.xml文件就会被修改,所以也可以在文件中之间修改,然后重新加载
+使用命令实际也是在修改文件，需要重新加载才能生效。

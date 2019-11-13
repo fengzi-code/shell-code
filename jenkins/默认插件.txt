@@ -1,0 +1,30 @@
+folders
+timestamper
+Pipeline
+subversion
+ldap
+OWASP Markup Formatter
+workspace cleanup
+github organization folder
+ssh slaves
+email extension
+build timeout
+ant
+pipeline stage view
+matrix authorization strategy
+maller
+credentials binding
+gradle
+git
+pamauthentication
+
+
+Locale
+Maven Integration
+
+
+https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json
+
+http://mirror.xmission.com/jenkins/updates/current/update-center.json
+
+http://updates.jenkins-ci.org/update-center.json

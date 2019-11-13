@@ -1,0 +1,29 @@
+使用下面的命令来验证网络管理器服务的状态：
+
+$ systemctl status NetworkManager.service
+运行以下命令来检查受网络管理器管理的网络接口：
+
+$ nmcli dev status
+nmtui
+chkconfig NetworkManager off
+
+
+NM_CONTROLLED="no"
+TYPE="Ethernet"
+BOOTPROTO="static"
+DEFROUTE="yes"
+IPV4_FAILURE_FATAL="no"
+IPV6INIT="yes"
+IPV6_AUTOCONF="yes"
+IPV6_DEFROUTE="yes"
+IPV6_FAILURE_FATAL="no"
+NAME="eno16777736"
+UUID="cb185f93-0496-4a47-b0cf-2d194f4ed452"
+ONBOOT="yes"
+HWADDR="00:0c:29:e4:da:9d"
+IPADDR0="192.168.1.122"
+PREFIX0="24"
+GATEWAY0=
+DNS1=
+IPV6_PEERDNS="yes"
+IPV6_PEERROUTES="yes"

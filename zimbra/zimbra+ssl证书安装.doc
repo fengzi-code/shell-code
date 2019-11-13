@@ -1,0 +1,396 @@
+Message-ID: <808051431.29842.1548234271963.JavaMail.confluence1@mzj-01>
+Subject: Exported From Confluence
+MIME-Version: 1.0
+Content-Type: multipart/related; 
+	boundary="----=_Part_29841_200990462.1548234271963"
+
+------=_Part_29841_200990462.1548234271963
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/exported.html
+
+<html xmlns:o=3D'urn:schemas-microsoft-com:office:office'
+      xmlns:w=3D'urn:schemas-microsoft-com:office:word'
+      xmlns:v=3D'urn:schemas-microsoft-com:vml'
+      xmlns=3D'urn:w3-org-ns:HTML'>
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+">
+    <title>zimbra ssl=E8=AF=81=E4=B9=A6=E5=AE=89=E8=A3=85</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:TargetScreenSize>1024x640</o:TargetScreenSize>
+            <o:PixelsPerInch>72</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+                <!--
+        @page Section1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+            mso-paper-source: 0;
+        }
+
+        table {
+            border: solid 1px;
+            border-collapse: collapse;
+        }
+
+        table td, table th {
+            border: solid 1px;
+            padding: 5px;
+        }
+
+        td {
+            page-break-inside: avoid;
+        }
+
+        tr {
+            page-break-after: avoid;
+        }
+
+        div.Section1 {
+            page: Section1;
+        }
+
+        /* Confluence print stylesheet. Common to all themes for print medi=
+a */
+/* Full of !important until we improve batching for print CSS */
+
+@media print {
+    #main {
+        padding-bottom: 1em !important; /* The default padding of 6em is to=
+o much for printouts */
+    }
+
+    body {
+        font-family: Arial, Helvetica, FreeSans, sans-serif;
+        font-size: 10pt;
+        line-height: 1.2;
+    }
+
+    body, #full-height-container, #main, #page, #content, .has-personal-sid=
+ebar #content {
+        background: #fff !important;
+        color: #000 !important;
+        border: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    a, a:link, a:visited, a:focus, a:hover, a:active {
+        color: #000;
+    }
+
+    #content h1,
+    #content h2,
+    #content h3,
+    #content h4,
+    #content h5,
+    #content h6 {
+        font-family: Arial, Helvetica, FreeSans, sans-serif;
+        page-break-after: avoid;
+    }
+
+    pre {
+        font-family: Monaco, "Courier New", monospace;
+    }
+
+    #header,
+    .aui-header-inner,
+    #navigation,
+    #sidebar,
+    .sidebar,
+    #personal-info-sidebar,
+    .ia-fixed-sidebar,
+    .page-actions,
+    .navmenu,
+    .ajs-menu-bar,
+    .noprint,
+    .inline-control-link,
+    .inline-control-link a,
+    a.show-labels-editor,
+    .global-comment-actions,
+    .comment-actions,
+    .quick-comment-container,
+    #addcomment {
+        display: none !important;
+    }
+
+    /* CONF-28544 cannot print multiple pages in IE */
+    #splitter-content {
+        position: relative !important;
+    }
+
+    .comment .date::before {
+        content: none !important; /* remove middot for print view */
+    }
+
+    h1.pagetitle img {
+        height: auto;
+        width: auto;
+    }
+
+    .print-only {
+        display: block;
+    }
+
+    #footer {
+        position: relative !important; /* CONF-17506 Place the footer at en=
+d of the content */
+        margin: 0;
+        padding: 0;
+        background: none;
+        clear: both;
+    }
+
+    #poweredby {
+        border-top: none;
+        background: none;
+    }
+
+    #poweredby li.print-only {
+        display: list-item;
+        font-style: italic;
+    }
+
+    #poweredby li.noprint {
+        display: none;
+    }
+
+    /* no width controls in print */
+    .wiki-content .table-wrap,
+    .wiki-content p,
+    .panel .codeContent,
+    .panel .codeContent pre,
+    .image-wrap {
+        overflow: visible !important;
+    }
+
+    /* TODO - should this work? */
+    #children-section,
+    #comments-section .comment,
+    #comments-section .comment .comment-body,
+    #comments-section .comment .comment-content,
+    #comments-section .comment p {
+        page-break-inside: avoid;
+    }
+
+    #page-children a {
+        text-decoration: none;
+    }
+
+    /**
+     hide twixies
+
+     the specificity here is a hack because print styles
+     are getting loaded before the base styles. */
+    #comments-section.pageSection .section-header,
+    #comments-section.pageSection .section-title,
+    #children-section.pageSection .section-header,
+    #children-section.pageSection .section-title,
+    .children-show-hide {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .children-show-hide.icon {
+        display: none;
+    }
+
+    /* personal sidebar */
+    .has-personal-sidebar #content {
+        margin-right: 0px;
+    }
+
+    .has-personal-sidebar #content .pageSection {
+        margin-right: 0px;
+    }
+
+    .no-print, .no-print * {
+        display: none !important;
+    }
+}
+-->
+    </style>
+</head>
+<body>
+    <h1>zimbra ssl=E8=AF=81=E4=B9=A6=E5=AE=89=E8=A3=85</h1>
+    <div class=3D"Section1">
+        <p>1. =E9=98=BF=E9=87=8C=E4=BA=91=E7=94=B3=E8=AF=B7=E4=B8=80=E5=B9=
+=B4=E5=85=8D=E8=B4=B9=E8=AF=81=E4=B9=A6 Symantec =E5=85=8D=E8=B4=B9=E7=89=
+=88 SSL</p>
+<p>2. =E4=B8=8B=E8=BD=BD=E8=AF=81=E4=B9=A6 apache=E7=89=88=E6=9C=AC<br>=E5=
+=BE=97=E5=88=B0=E4=BB=A5=E4=B8=8B=E4=B8=89=E4=B8=AA=E6=96=87=E4=BB=B6:</p>
+<p><br>=E8=AF=81=E4=B9=A6=E7=A7=81=E9=92=A5 <a href=3D"http://1745379_mail.=
+mzjmedia.net" class=3D"external-link" rel=3D"nofollow">1745379_mail.mzjmedi=
+a.net</a>.key<br>=E8=AF=81=E4=B9=A6=E9=93=BE 1745379_mail.mzjmedia.net_chai=
+n.crt<br>=E8=AF=81=E4=B9=A6=E5=85=AC=E9=92=A5 1745379_mail.mzjmedia.net_pub=
+lic.crt</p>
+<p>3. =E9=98=BF=E9=87=8C=E4=BA=91=E6=8F=90=E4=BA=A4=E5=B7=A5=E5=8D=95=E7=94=
+=B3=E8=AF=B7=E6=A0=B9=E8=AF=81=E4=B9=A6=E6=96=87=E4=BB=B6 ov-root.cer<br>=
+=E4=B8=8B=E8=BD=BD=E6=A0=B9=E8=AF=81=E4=B9=A6 ov-root.cer</p>
+<p><img height=3D"250" style=3D"margin: 2px; border: 1px solid #ddd; box-si=
+zing: border-box; vertical-align: text-bottom;" src=3D"80cfebc01121e187b0d0=
+4b6eddcd09d9" width=3D"250"></p>
+<p>4. =E4=B8=8A=E4=BC=A04=E4=B8=AA=E8=AF=81=E4=B9=A6=E6=96=87=E4=BB=B6</p>
+<p>5. =E5=90=88=E5=B9=B6=E8=AF=81=E4=B9=A6=E9=93=BE</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=3D"brush=
+: bash; gutter: true; theme: Confluence" data-theme=3D"Confluence">cat ov-r=
+oot.cer &gt;&gt; 1745379_mail.mzjmedia.net_chain.crt</pre>=20
+</div>
+</div>
+<p><br><br></p>
+<p>6.=E6=A0=A1=E9=AA=8C=E8=AF=81=E4=B9=A6<br>=E5=91=BD=E4=BB=A4=E6=A0=BC=E5=
+=BC=8F zmcertmgr verifycrt comm =E7=A7=81=E9=92=A5 =E5=85=AC=E9=92=A5 =E5=
+=B8=A6=E6=A0=B9=E8=AF=81=E4=B9=A6=E7=9A=84=E8=AF=81=E4=B9=A6=E9=93=BE</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=3D"brush=
+: bash; gutter: false; theme: Confluence" data-theme=3D"Confluence">/opt/zi=
+mbra/bin/zmcertmgr verifycrt comm 1745379_mail.mzjmedia.net.key 1745379_mai=
+l.mzjmedia.net_public.crt 1745379_mail.mzjmedia.net_chain.crt</pre>=20
+</div>
+</div>
+<p>=E6=98=BE=E7=A4=BA=E5=A6=82=E4=B8=8B=E8=A1=A8=E6=98=8E=E9=80=9A=E8=BF=87=
+=E6=A0=A1=E9=AA=8C</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=3D"brush=
+: bash; gutter: false; theme: Confluence" data-theme=3D"Confluence">** Veri=
+fying 1745379_mail.mzjmedia.net_public.crt against 1745379_mail.mzjmedia.ne=
+t.key
+Certificate (1745379_mail.mzjmedia.net_public.crt) and private key (1745379=
+_mail.mzjmedia.net.key) match.
+Valid Certificate: 1745379_mail.mzjmedia.net_public.crt: OK</pre>=20
+</div>
+</div>
+<p><br></p>
+<p>7.=E5=A4=8D=E5=88=B6=E7=A7=81=E9=92=A5=E5=88=B0/opt/zimbra/ssl/zimbra/co=
+mmercial</p>
+<p>=E5=A4=87=E4=BB=BD=E5=8E=9F=E5=85=88=E7=9A=84=E7=A7=81=E9=92=A5</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=3D"brush=
+: bash; gutter: false; theme: Confluence" data-theme=3D"Confluence">mv /opt=
+/zimbra/ssl/zimbra/commercial/commercial.key /opt/zimbra/ssl/zimbra/commerc=
+ial/commercial.key.bak</pre>=20
+</div>
+</div>
+<p><br><br></p>
+<p>=E5=A4=8D=E5=88=B6=E6=96=B0=E7=A7=81=E9=92=A5</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=3D"brush=
+: bash; gutter: false; theme: Confluence" data-theme=3D"Confluence">cp 1745=
+379_mail.mzjmedia.net.key /opt/zimbra/ssl/zimbra/commercial/commercial.keyk=
+</pre>=20
+</div>
+</div>
+<p><br><br></p>
+<p><br>8. =E6=9B=B4=E6=96=B0=E8=AF=81=E4=B9=A6</p>
+<p>=E5=91=BD=E4=BB=A4=E6=A0=BC=E5=BC=8F&nbsp;/opt/zimbra/bin/zmcertmgr depl=
+oycrt comm&nbsp;=E5=85=AC=E9=92=A5&nbsp;=E5=90=88=E5=B9=B6=E6=A0=B9=E8=AF=
+=81=E4=B9=A6=E7=9A=84=E8=AF=81=E4=B9=A6=E9=93=BE</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=3D"brush=
+: bash; gutter: false; theme: Confluence" data-theme=3D"Confluence">/opt/zi=
+mbra/bin/zmcertmgr deploycrt comm 1745379_mail.mzjmedia.net_public.crt 1745=
+379_mail.mzjmedia.net_chain.crt</pre>=20
+</div>
+</div>
+<p><br></p>
+<p>=E6=98=BE=E7=A4=BA=E5=A6=82=E4=B8=8B,=E4=B8=8D=E6=8A=A5=E9=94=99=E8=A1=
+=A8=E7=A4=BA=E6=9B=B4=E6=96=B0=E6=88=90=E5=8A=9F.</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=3D"brush=
+: bash; gutter: false; theme: Confluence" data-theme=3D"Confluence">** Veri=
+fying 1745379_mail.mzjmedia.net_public.crt against /opt/zimbra/ssl/zimbra/c=
+ommercial/commercial.key
+Certificate (1745379_mail.mzjmedia.net_public.crt) and private key (/opt/zi=
+mbra/ssl/zimbra/commercial/commercial.key) match.
+Valid Certificate: 1745379_mail.mzjmedia.net_public.crt: OK
+** Copying 1745379_mail.mzjmedia.net_public.crt to /opt/zimbra/ssl/zimbra/c=
+ommercial/commercial.crt
+** Appending ca chain 1745379_mail.mzjmedia.net_chain.crt to /opt/zimbra/ss=
+l/zimbra/commercial/commercial.crt
+** Importing certificate /opt/zimbra/ssl/zimbra/commercial/commercial_ca.cr=
+t to CACERTS as zcs-user-commercial_ca...done.
+** NOTE: mailboxd must be restarted in order to use the imported certificat=
+e.
+** Saving server config key zimbraSSLCertificate...done.
+** Saving server config key zimbraSSLPrivateKey...done.
+** Installing mta certificate and key...done.
+** Installing slapd certificate and key...done.
+** Installing proxy certificate and key...done.
+** Creating pkcs12 file /opt/zimbra/ssl/zimbra/jetty.pkcs12...done.
+** Creating keystore file /opt/zimbra/mailboxd/etc/keystore...done.
+** Installing CA to /opt/zimbra/conf/ca...done.</pre>=20
+</div>
+</div>
+<p><br></p>
+<p>9. =E9=87=8D=E5=90=AFzimbra<br>=E5=88=87=E6=8D=A2=E7=94=A8=E6=88=B7</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=3D"brush=
+: bash; gutter: false; theme: Confluence" data-theme=3D"Confluence">su zimb=
+ra -
+/opt/zimbra/bin/zmcontrol restart</pre>=20
+</div>
+</div>
+<p><br></p>
+    </div>
+</body>
+</html>
+------=_Part_29841_200990462.1548234271963
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: base64
+Content-Location: file:///C:/80cfebc01121e187b0d04b6eddcd09d9
+
+iVBORw0KGgoAAAANSUhEUgAAAPoAAAD6CAMAAAC/MqoPAAADAFBMVEX19fXv7+98fHx1dXV9fX23
+t7eenp5wcHDn5+f09PTz8/Pd3d2SkpLY2Njt7e3Q0NCioqJycnKqqqq7u7uurq6CgoKGhobOzs7D
+w8PR0dGNjY3Hx8fj4+PGxsbS0tKoqKgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAABYhwFnAAAC6ElEQVR42u3ca3OaQBSH8QO7XNwI4iSpprmUfv8v5XQybadpJ40m
+3lKkoqImzbQ6U0Xh+b1ZZI+D/xzEC0QRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgC
+1n42408masPSxLaHJfoD+9rxN651bL9E0V1nm2rH3cuDsveylY339hk1KVHXvZ2WH3TXD1KFo6u9
+bEUnr9eEbXdkn52no83KSxQ96KvBOJXkMRgVFr2Yw1zLu5gvXHhBYYe5QqKH+iZfbKiwUkf4ZvQp
+X3xoNIvqhy5io/3BanmkpdRe7cFq7UNTqP6cL+8OX9Pp6ka3sK7zbo7oRCc60Q/iIzxdJzrRiU50
+ohOd6EQn+mFFN8ZUKXoW9nlxJlk5famZqkQfPPjTZkfzG8FEJH2oTtcb0o/u25J9I/+jL9IopOuF
+nHhK7aF0jTqxz+6DdBrdGUz+Vl6m6PWeeZaxBOrJ7j2LnAzMqIDoxXwvce2tXS7j25f/KC9TdDnV
+J/li4J1KlaLLtR21/FrNb0X6UqoVXUKnrr2mrjuWVC36fyznPTzRDyx6stWln35Souj2VmESu0zR
+020uD95TdC4KBwAAAAAAAACg7G6qG72QE+qHcab1ooiN7vYKqvdjraexskvDLG9+yjH2fulkPtFd
+FHRjiaKf2aRlu7rdE6lbutXLa4+y625fqfbnbpj9II+T/ypPqs4XE3mBdKTTmc2dqFH9u8gHV6mx
+u6g90qewlXVbAs+I8a7m6+Kr1cRyjPM7mNXgLWqPs+vDdNq4ofTEFyO3i5W3q4nluLxDfz68i+N4
+uKjdmd3/9/jH6VP3UXrNr1lrOy8nXoxrsjJLjlm+P4vnLl++Ytlghw/Xao9zh08bxjRmC1b65kQ+
+frma99gJ5drLngPGuDt/rd9p9LFJkq4724r95kQ+pnfurMdPd+m3aLraTRLrXAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAwDZ+A1IPn6/LJ0iAAAAAAElFTkSuQmCC
+------=_Part_29841_200990462.1548234271963--

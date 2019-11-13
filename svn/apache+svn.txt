@@ -1,0 +1,33 @@
+yum install httpd mod_dav_svn
+yum install subversion
+
+
+mod_dav_svn.so
+mod_authz_svn.so
+
+vim /etc/httpd/conf.d/subversion.conf
+
+#/repos apache虚拟目录
+<Location /repos>
+DAV svn
+SVNParentPath /data/svn
+AuthType Basic
+AuthName "SVN server of repos"   认证时弹出的信息
+AuthUserFile /data/svn/svn-passwd.conf 存储用户名密码
+#权限文件
+AuthzSVNAccessFile /data/svn/svn-auth.conf  
+Require valid-user
+</Location>
+----------------------------------------------------------
+htpasswd -bc /data/mzj/svn-passwd.conf zsadmin zsQW125gz 增加用户名密码
+htpasswd  /data/mzj/svn-passwd.conf fz22 wsxedc 第二次增加
+------------------------------------------------------------
+vim  /data/mzj/svn-auth.conf
+
+[/]
+fz11 = rw
+
+[fz1:/] 
+fz22 =rw
+--------------------------------
+chown -R apache:apache /data/mzj
