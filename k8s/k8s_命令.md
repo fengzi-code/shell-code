@@ -1,5 +1,5 @@
-[toc]
-### 0. 常用命令
+
+###  常用命令
 
 ```sh
 kubectl run nginx-deploy --image=nginx:1.14-alpine --port=80 --replicas=1
@@ -31,46 +31,25 @@ kubectl label pods my-pod -n prod app- # 给pod删除标签app
 kubectl get pods --show-labels -l app=myapp # 显示app标签值为myapp的所有pod
 kubectl get pods --show-labels -l "app in (myapp,nginx)" # 显示app标签值为myapp或nginx的所有pod
 
+kubectl exec -it nginx-4wmf9  -- /bin/sh   # 进入pod的bash环境,nginx-4wmf9为pod名字,pod下有多个容器时需指定容器ID ,  nginx-4wmf9 -c 容器ID
 
 
 
-```
-### 1. kubectl annotate  更新资源的注解
-### 3. kubectl api-versions     输出服务端API版本
-### 4. kubectl apply     声明式资源配置
-
-```sh
 # Usage:
   kubectl apply (-f FILENAME | -k DIRECTORY) [options]
-```
-### 5. kubectl attach     连接到正在运行的容器
-### 6. kubectl autoscale     对replication controller进行自动伸缩
-### 7. kubectl cluster-info     输出集群信息
-### 8. kubectl config     修改kubeconfig配置文件
-### 9. kubectl create     创建资源
-### 10. kubectl delete     删除资源
-### 11. kubectl describe    输出资源的详细信息
-```bash
+
 # Usage:
 kubectl describe (-f FILENAME | TYPE [NAME_PREFIX | -l label] | TYPE/NAME) [options]
 # Examples: 
 kubectl describe nodes my-node    # 查看节点my-node的详细信息
 kubectl describe pods my-pod      # 查看pod my-pod的详细信息
 
-```
-### 12. kubectl edit     编辑服务端的资源。
-### 13. kubectl exec     在容器内部执行命令
-
-```sh
 # Usage:
 kubectl exec POD [-c CONTAINER] -- COMMAND [args...] [options]
 # Examples:
 kubectl exec my-pod ls                         # 对my-pod执行ls命令
 kubectl exec -t -i nginx-78f5d695bd-czm8z bash # 进入pod的shell，并打开伪终端和标准输入
-```
-### 14. kubectl expose     暴露为新的kubernetes service。
-### 15. kubectl get     输出资源
-```
+
 # Usage:
   kubectl get
 [(-o|--output=)](TYPE[.VERSION][.GROUP] [NAME | -l label] | TYPE[.VERSION][.GROUP]/NAME ...) [flags] 
@@ -84,11 +63,6 @@ kubectl get deployment my-dep --watch         # --watch 参数可以监控资源
 kubectl get pod my-pod -o yaml                # 查看yaml格式的资源配置，这里包括资实际的status，可以用--export排除
 kubectl get pod my-pod -l app=nginx           # 查看所有带有标签app: nginx的pod
 
-```
-### 16. kubectl label     更新资源的label
-### 17. kubectl logs     输出容器日志
-
-```
 # Usage:
   kubectl logs [-f] [-p] (POD | TYPE/NAME) [-c CONTAINER] [options]
 # Examples: 
@@ -106,25 +80,7 @@ kubectl logs my-pod  --since-time=2018-11-01T15:00:00Z
 # 指定时间戳输出日志            
 kubectl logs my-pod  --since=1h 
 # 指定时间段输出日志，单位s/m/h
-```
-### 19. kubectl patch     通过控制台输入更新资源中的字段
-### 20. kubectl port-forward     将本地端口转发到Pod
-### 21. kubectl proxy     启动代理服务器
-### 22. kubectl replace     替换资源
-### 23. kubectl rolling-update     执行滚动升级
-### 24. kubectl run     指定镜像启动容器
-### 25. kubectl scale     设置新的副本数
-### 27. kubectl version     输出服务端和客户端的版本信息
-### 28. kubectl cordon	    设定node不可使用
-### 29. kubectl uncordon	    设定node可以使用
-### 30. kubectl drain	    设定node进入维护模式
 
-
-
-
-
-
-```
 # 创建资源
 kubectl run nginx --replicas=3 --labels="app=nginx-example" --image=nginx:1.10 --port=80
 # kubectl get all

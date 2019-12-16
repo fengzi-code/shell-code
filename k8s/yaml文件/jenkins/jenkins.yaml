@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service  #资源类别是Service
+metadata:      #元数据
+  name: myapp  #在同一个资源类别中，唯一的名字
+  namespace: default  #名称空间
+spec:    #目标状态
+  selector:    #
+    app: myapp
+    release: canary
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deploy
+  namespace: default
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: myapp
+      release: canary
+  template:
+    metadata:
+      labels:
+        app: myapp
+        release: canary
+    spec:
+      containers:   #以下是容器的配置。与containers同级的配置属于pod的设置
+      - name: myapp
+        image: registry.cn-hangzhou.aliyuncs.com/app_xzb/jenkins:test
+        ports:
+        - name: http
+          containerPort: 8080
+
+

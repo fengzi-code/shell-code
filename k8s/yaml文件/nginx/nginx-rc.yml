@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-alpine-service
+  namespace: default
+spec:
+  selector:
+    app: nginx-alpine-html
+    release: canary
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: nginx-alpine-html
+  namespace: default
+spec:
+  replicas: 4
+  selector: 
+    matchLabels:
+      app: nginx-alpine-html
+      release: canary
+  template:
+    metadata:
+      labels:
+        app: nginx-alpine-html
+        release: canary
+    spec:
+      containers:
+      - name: nginx-alpine-html
+        image: registry.cn-hangzhou.aliyuncs.com/k8s_xzb/nginx-alpine:1.14
+        ports:
+        - name: http
+          containerPort: 80

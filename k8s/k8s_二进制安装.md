@@ -11,9 +11,9 @@ flannel | 0.11
 -----
 角色|IP|组件|推荐配置|备注
 ---|---|---|---|---
-master|192.168.128.130|kube-apiserver、kube-controller-manager、kube-scheduler、etcd|4核4G
-node1|192.168.128.128|kubelet、kube-proxy、docker、flannel、etcd|4核4G
-node2|192.168.128.129|kubelet、kube-proxy、docker、flannel、etcd|4核4G
+master|192.168.0.130|kube-apiserver、kube-controller-manager、kube-scheduler、etcd|4核4G
+node1|192.168.0.150|kubelet、kube-proxy、docker、flannel、etcd|4核4G
+node2|192.168.0.151|kubelet、kube-proxy、docker、flannel、etcd|4核4G
 ------------------------------
 ![](paste_image/2019-06-19-19-54-42.png)
 ## 2. 准备工作
@@ -26,21 +26,23 @@ yum install ansible -y
 ```bash
 ssh-keygen
 # 全部回车，创建无密码的秘钥对
-ssh-copy-id root@192.168.128.128
-ssh-copy-id root@192.168.128.129
+ssh-copy-id root@192.168.0.150
+ssh-copy-id root@192.168.0.151
 ```
 3. `ansible`设置`k8snodes`分组
 ```bash
 mv /etc/ansible/hosts /etc/ansible/hosts.default
 cat >> /etc/ansible/hosts <<EOF
 [k8snodes]
-192.168.128.128
-192.168.128.129
+192.168.0.150
+192.168.0.151
 EOF
 ```
 测试一下
 ```bash
 ansible k8snodes -m shell -a "hostname -I" 
+ansible 192.168.0.150 -m shell -a "hostnamectl --static set-hostname k8s-node-1"
+ansible 192.168.0.151 -m shell -a "hostnamectl --static set-hostname k8s-node-2"
 ```
 注意，`ansible`分组名不支持`-`，虽然也能用，但是会发出报警信息，很不爽
 4. 创建`k8s`统一目录`/opt/kubernetes/{bin,logs,ssl,cfg}`
@@ -83,7 +85,7 @@ ansible k8snodes -m yum -a 'name=docker-ce'
 
 cat > /tmp/daemon.json <<EOF
 {
-    "registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"]
+    "registry-mirrors": ["https://lveka1qp.mirror.aliyuncs.com"]
 }
 EOF
 ansible k8snodes -m copy -a 'src=/tmp/daemon.json dest=/etc/docker/ backup=yes force=yes'
@@ -162,9 +164,10 @@ cat >server-csr.json <<EOF
     "CN": "kubernetes",
     "hosts": [
       "127.0.0.1",
-      "192.168.128.130",
-      "192.168.128.129",
-      "192.168.128.128",
+      "192.168.0.130",
+      "192.168.0.151",
+      "192.168.0.150",
+      "192.168.0.152",
       "10.10.10.1",
       "kubernetes",
       "kubernetes.default",
@@ -240,7 +243,7 @@ cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kube
 cd /opt/kubernetes/
 
 sh create_ssl.sh
-rm *.sh *.json *.csr -rf
+rm *.sh *.json *.csr -f
 mv *.pem ssl/
 
 ansible k8snodes -m copy -a 'src=/opt/kubernetes/ssl dest=/opt/kubernetes force=yes'
@@ -255,26 +258,29 @@ ETCD_VER=v3.3.13
 DOWNLOAD_URL="https://github.com/etcd-io/etcd/releases/download"
 curl -L ${DOWNLOAD_URL}/${ETCD_VER}/etcd-${ETCD_VER}-linux-amd64.tar.gz -o /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz
 tar -xf /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz -C /tmp/ && rm -f /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz
-mv /tmp/etcd* /opt/kubernetes/bin/
+mv /tmp/etcd-${ETCD_VER}-linux-amd64/etcd* /opt/kubernetes/bin/
 
 ```
 
 2. 配置etcd集群
 ```bash
 # 注意换行符,空格等
-cat > /opt/kubernetes/cfg/etcd <<EOF
-#[Member]
-ETCD_NAME="etcd01"
-ETCD_DATA_DIR="/var/lib/etcd/default.etcd"
-ETCD_LISTEN_PEER_URLS="https://192.168.128.130:2380"
-ETCD_LISTEN_CLIENT_URLS="https://192.168.128.130:2379"
-
-#[Clustering]
-ETCD_INITIAL_ADVERTISE_PEER_URLS="https://192.168.128.130:2380"
-ETCD_ADVERTISE_CLIENT_URLS="https://192.168.128.130:2379"
-ETCD_INITIAL_CLUSTER="etcd01=https://192.168.128.130:2380,etcd02=https://192.168.128.128:2380,etcd03=https://192.168.128.129:2380"
-ETCD_INITIAL_CLUSTER_TOKEN="etcd-cluster"
-ETCD_INITIAL_CLUSTER_STATE="new"
+cat > /opt/kubernetes/cfg/etcd1 <<EOF
+ETCD_OPTS="--name=etcd01 \\
+--data-dir=/var/lib/etcd/default.etcd \\
+--listen-peer-urls='https://192.168.0.130:2380' \\
+--listen-client-urls='https://192.168.0.130:2379,http://127.0.0.1:2379' \\
+--advertise-client-urls='https://192.168.0.130:2379' \\
+--initial-advertise-peer-urls='https://192.168.0.130:2380' \\
+--initial-cluster='etcd01=https://192.168.0.130:2380,etcd02=https://192.168.0.150:2380,etcd03=https://192.168.0.151:2380' \
+--initial-cluster-token='etcd-cluster' \\
+--initial-cluster-state='new' \\
+--cert-file=/opt/kubernetes/ssl/server.pem \\
+--key-file=/opt/kubernetes/ssl/server-key.pem \\
+--peer-cert-file=/opt/kubernetes/ssl/server.pem \\
+--peer-key-file=/opt/kubernetes/ssl/server-key.pem \\
+--trusted-ca-file=/opt/kubernetes/ssl/ca.pem \\
+--peer-trusted-ca-file=/opt/kubernetes/ssl/ca.pem"
 EOF
 ```
 三台机都要配置，每台机的配置里的`ETCD_NAME`和URLS换成本机的,注意换行符
@@ -284,17 +290,17 @@ ansible k8snodes -m copy -a 'src=/opt/kubernetes/cfg/etcd dest=/opt/kubernetes/c
 ansible k8snodes -m copy -a 'src=/opt/kubernetes/bin dest=/opt/kubernetes force=yes'
 ansible k8snodes -m shell -a 'chmod +x /opt/kubernetes/bin/*'
 
-ansible 192.168.128.128 -m replace -a 'path=/opt/kubernetes/cfg/etcd regexp=\"https://192.168.128.130:2380 replace=\"https://192.168.128.128:2380'
+ansible 192.168.0.150 -m replace -a "path=/opt/kubernetes/cfg/etcd regexp=\'https://192.168.0.130:2380 replace=\'https://192.168.0.150:2380"
 
-ansible 192.168.128.129 -m replace -a 'path=/opt/kubernetes/cfg/etcd regexp=\"https://192.168.128.130:2380 replace=\"https://192.168.128.129:2380'
+ansible 192.168.0.151 -m replace -a "path=/opt/kubernetes/cfg/etcd regexp=\'https://192.168.0.130:2380 replace=\'https://192.168.0.151:2380"
 
-ansible 192.168.128.128 -m replace -a 'path=/opt/kubernetes/cfg/etcd regexp=https://192.168.128.130:2379 replace=https://192.168.128.128:2379'
+ansible 192.168.0.150 -m replace -a "path=/opt/kubernetes/cfg/etcd regexp=https://192.168.0.130:2379 replace=https://192.168.0.150:2379"
 
-ansible 192.168.128.129 -m replace -a 'path=/opt/kubernetes/cfg/etcd regexp=https://192.168.128.130:2379 replace=https://192.168.128.129:2379'
+ansible 192.168.0.151 -m replace -a "path=/opt/kubernetes/cfg/etcd regexp=https://192.168.0.130:2379 replace=https://192.168.0.151:2379"
 
-ansible 192.168.128.128 -m replace -a 'path=/opt/kubernetes/cfg/etcd regexp=etcd01\" replace=etcd02\"'
+ansible 192.168.0.150 -m replace -a 'path=/opt/kubernetes/cfg/etcd regexp==etcd01 replace==etcd02'
 
-ansible 192.168.128.129 -m replace -a 'path=/opt/kubernetes/cfg/etcd regexp=etcd01\" replace=etcd03\"'
+ansible 192.168.0.151 -m replace -a 'path=/opt/kubernetes/cfg/etcd regexp==etcd01 replace==etcd03'
 ```
 
 3. 配置`etcd.service`启动脚本
@@ -311,22 +317,7 @@ Wants=network-online.target
 [Service]
 Type=notify
 EnvironmentFile=/opt/kubernetes/cfg/etcd
-ExecStart=/opt/kubernetes/bin/etcd \\
---name=\${ETCD_NAME} \\
---data-dir=\${ETCD_DATA_DIR} \\
---listen-peer-urls=\${ETCD_LISTEN_PEER_URLS} \\
---listen-client-urls=\${ETCD_LISTEN_CLIENT_URLS},http://127.0.0.1:2379 \\
---advertise-client-urls=\${ETCD_ADVERTISE_CLIENT_URLS} \\
---initial-advertise-peer-urls=\${ETCD_INITIAL_ADVERTISE_PEER_URLS} \\
---initial-cluster=\${ETCD_INITIAL_CLUSTER} \\
---initial-cluster-token=\${ETCD_INITIAL_CLUSTER_TOKEN} \\
---initial-cluster-state=\${ETCD_INITIAL_CLUSTER_STATE} \\
---cert-file=/opt/kubernetes/ssl/server.pem \\
---key-file=/opt/kubernetes/ssl/server-key.pem \\
---peer-cert-file=/opt/kubernetes/ssl/server.pem \\
---peer-key-file=/opt/kubernetes/ssl/server-key.pem \\
---trusted-ca-file=/opt/kubernetes/ssl/ca.pem \\
---peer-trusted-ca-file=/opt/kubernetes/ssl/ca.pem
+ExecStart=/opt/kubernetes/bin/etcd \$ETCD_OPTS
 Restart=on-failure
 LimitNOFILE=65536
 
@@ -353,7 +344,7 @@ tail -f /var/log/messages
 3. etcd集群状态查看
 ```bash
 cd /opt/kubernetes/ssl
-etcdctl --ca-file=ca.pem --cert-file=server.pem --key-file=server-key.pem --endpoints="https://192.168.128.130:2379,https://192.168.128.128:2379,https://192.168.128.129:2379"  cluster-health
+etcdctl --ca-file=ca.pem --cert-file=server.pem --key-file=server-key.pem --endpoints="https://192.168.0.130:2379,https://192.168.0.150:2379,https://192.168.0.151:2379"  cluster-health
 ```
 ## 5. 部署Flannel网络
 
@@ -367,7 +358,7 @@ wget -c https://github.com/coreos/flannel/releases/download/v0.11.0/flannel-v0.1
 tar xf flannel-v0.11.0-linux-arm64.tar.gz
 ansible k8snodes -m copy -a 'src=/opt/kubernetes/flanneld dest=/opt/kubernetes/bin/ force=yes'
 ansible k8snodes -m copy -a 'src=/opt/kubernetes/mk-docker-opts.sh dest=/opt/kubernetes/bin/ force=yes'
-ansible k8snodes -m shell -a ' chmod +x /opt/kubernetes/bin/* '
+ansible k8snodes -m shell -a 'chmod +x /opt/kubernetes/bin/*'
 rm  flannel* mk-docker-opts.sh *.md -rf
 
 ```
@@ -376,14 +367,13 @@ rm  flannel* mk-docker-opts.sh *.md -rf
 ```bash
 cd /opt/kubernetes/ssl
 etcdctl --ca-file=ca.pem --cert-file=server.pem --key-file=server-key.pem \
---endpoints="https://192.168.128.130:2379,https://192.168.128.128:2379,https://192.168.128.129:2379" \
-set /coreos.com/network/config '{"Network": "172.17.0.0/16", "Backend": {"Type": "vxlan"}}'
+--endpoints="https://192.168.0.130:2379,https://192.168.0.150:2379,https://192.168.0.151:2379" set /coreos.com/network/config '{"Network": "172.17.0.0/16", "Backend": {"Type": "vxlan"}}'
 ```
 
 3. 节点配置flannel
 ```bash
 cat <<EOF > /opt/kubernetes/cfg/flanneld 
-FLANNEL_OPTIONS="--etcd-endpoints=https://192.168.128.130:2379,https://192.168.128.128:2379,https://192.168.128.129:2379 -etcd-cafile=/opt/kubernetes/ssl/ca.pem -etcd-certfile=/opt/kubernetes/ssl/server.pem -etcd-keyfile=/opt/kubernetes/ssl/server-key.pem"
+FLANNEL_OPTIONS="--etcd-endpoints=https://192.168.0.130:2379,https://192.168.0.150:2379,https://192.168.0.151:2379 -etcd-cafile=/opt/kubernetes/ssl/ca.pem -etcd-certfile=/opt/kubernetes/ssl/server.pem -etcd-keyfile=/opt/kubernetes/ssl/server-key.pem"
 EOF
 
 ansible k8snodes -m copy -a 'src=/opt/kubernetes/cfg/flanneld dest=/opt/kubernetes/cfg/flanneld force=yes'
@@ -459,7 +449,7 @@ ${BOOTSTRAP_TOKEN},kubelet-bootstrap,10001,"system:kubelet-bootstrap"
 EOF
 #---------------
 # 创建kubelet bootstrapping kubeconfig
-export KUBE_APISERVER="https://192.168.128.130:6443"
+export KUBE_APISERVER="https://192.168.0.130:6443"
 
 # 设置集群参数
 kubectl config set-cluster kubernetes \
@@ -521,7 +511,7 @@ kubectl config use-context default \
 `kube-apiserver`部署脚本内容如下：
 ```bash
 #!/bin/bash
-MASTER_ADDRESS=${1:-"192.168.128.130"}
+MASTER_ADDRESS=${1:-"192.168.0.130"}
 # 上面这句话的意思是，如果脚本没有传入参数$1，则MASTER_ADDRESS=192.168.128.130，反之MASTER_ADDRESS=$1
 ETCD_SERVERS=${2:-"http://127.0.0.1:2379"}
 # 上面这句话的意思是，如果脚本没有传入参数$2，则ETCD_SERVERS=http://127.0.0.1:2379，反之ETCD_SERVERS=$2
@@ -538,7 +528,8 @@ KUBE_APISERVER_OPTS="--logtostderr=true \\
 --advertise-address=${MASTER_ADDRESS} \\
 --allow-privileged=true \\
 --service-cluster-ip-range=10.10.10.0/24 \\
---admission-control=NamespaceLifecycle,LimitRanger,SecurityContextDeny,ServiceAccount,ResourceQuota,NodeRestriction \\
+--enable-admission-plugins=AlwaysPullImages,DefaultStorageClass,DefaultTolerationSeconds,LimitRanger,NamespaceExists,NamespaceLifecycle,NodeRestriction,OwnerReferencesPermissionEnforcement,PodNodeSelector,PersistentVolumeClaimResize,PodPreset,PodTolerationRestriction,ResourceQuota,ServiceAccount,StorageObjectInUseProtection MutatingAdmissionWebhook ValidatingAdmissionWebhook \\
+--disable-admission-plugins=DenyEscalatingExec,ExtendedResourceToleration,ImagePolicyWebhook,LimitPodHardAntiAffinityTopology,NamespaceAutoProvision,Priority,EventRateLimit,PodSecurityPolicy \\
 --authorization-mode=RBAC,Node \\
 --kubelet-https=true \\
 --enable-bootstrap-token-auth \\
@@ -574,7 +565,7 @@ systemctl status kube-apiserver
 
 执行这个脚本
 ```bash
-sh -x kube-apiserver.sh 192.168.128.130 "https://192.168.128.130:2379,https://192.168.128.128:2379,https://192.168.128.129:2379"
+sh -x kube-apiserver.sh 192.168.0.130 "https://192.168.0.130:2379,https://192.168.0.150:2379,https://192.168.0.151:2379"
 rm -f kube-apiserver.sh 
 
 ```
@@ -591,7 +582,7 @@ kubectl config set-cluster kubernetes \
 --embed-certs=true \
 --server=http://127.0.0.1:8080 \
 --kubeconfig=kube_controller_manager.kubeconfig
-#--server=http://127.0.0.1:8080  为每台kube-apiserver IP加端口不使用vip ip 连接，如果不是本机的apiserver，请使用https地址https://192.168.128.130:6443
+#--server=http://127.0.0.1:8080  为每台kube-apiserver IP加端口不使用vip ip 连接，如果不是本机的apiserver，请使用https地址https://192.168.0.130:6443
 
 kubectl config set-credentials system:kube-controller-manager \
 --client-certificate=/opt/kubernetes/ssl/server.pem \
@@ -796,8 +787,8 @@ systemctl status kubelet
 # 绑定角色
 kubectl create clusterrolebinding kubelet-bootstrap --clusterrole=system:node-bootstrapper --user=kubelet-bootstrap
 ansible k8snodes -m copy -a "src=/tmp/kubelet.sh dest=/tmp/ force=yes"
-ansible 192.168.128.128 -m shell -a "sh -x /tmp/kubelet.sh 192.168.128.128 10.10.10.2"
-ansible 192.168.128.129 -m shell -a "sh -x /tmp/kubelet.sh 192.168.128.129 10.10.10.2"
+ansible 192.168.0.150 -m shell -a "sh -x /tmp/kubelet.sh 192.168.0.150 10.10.10.2"
+ansible 192.168.0.151 -m shell -a "sh -x /tmp/kubelet.sh 192.168.0.151 10.10.10.2"
 kubectl get csr   # 查看证书情况,取现node的name
 # NAME                                                   AGE   REQUESTOR           CONDITION
 # node-csr-LOyIzSE7wmb4scK9kWNt3GOUKkhJNnB1oQId2zUvbwE   24s   kubelet-bootstrap   Pending
@@ -822,6 +813,7 @@ cat > ${KUBE_HOME}/cfg/kube-proxy <<EOF
 KUBE_PROXY_OPTS="--logtostderr=true \\
 --v=4 \\
 --hostname-override=${NODE_ADDRESS} \\
+--proxy-mode=ipvs \\
 --kubeconfig=${KUBE_HOME}/cfg/kube-proxy.kubeconfig"
 EOF
 cat > /usr/lib/systemd/system/kube-proxy.service <<EOF
@@ -845,8 +837,8 @@ systemctl status kube-proxy
 5. 在node节点上运行脚本
 ```bash
 ansible k8snodes -m copy -a "src=/tmp/kube-proxy.sh dest=/tmp/ force=yes"
-ansible 192.168.128.128 -m shell -a "sh -x /tmp/kube-proxy.sh 192.168.128.128"
-ansible 192.168.128.129 -m shell -a "sh -x /tmp/kube-proxy.sh 192.168.128.129"
+ansible 192.168.0.150 -m shell -a "sh -x /tmp/kube-proxy.sh 192.168.0.150"
+ansible 192.168.0.151 -m shell -a "sh -x /tmp/kube-proxy.sh 192.168.0.151"
 ```
 
 ## 11. dashboard安装(安装到node)
@@ -964,7 +956,7 @@ spec:
           # Uncomment the following line to manually specify Kubernetes API server Host
           # If not specified, Dashboard will attempt to auto discover the API server and connect
           # to it. Uncomment only if the default does not work.
-          # - --apiserver-host=http://192.168.128.130:8080
+          # - --apiserver-host=http://192.168.0.130:8080
         volumeMounts:
         - name: kubernetes-dashboard-certs
           mountPath: /certs
@@ -1024,7 +1016,7 @@ kubectl delete -f kubernetes-dashboard.yaml
 #生成证书 替换官方证书,解决chrome等浏览器拒绝访问
 cd /opt/kubernetes/cfg
 openssl genrsa -out dashboard.key 2048 
-openssl req -new -out dashboard.csr -key dashboard.key -subj '/CN=192.168.128.129'
+openssl req -new -out dashboard.csr -key dashboard.key -subj '/CN=192.168.0.151'
 openssl x509 -req  -days 3650 -in dashboard.csr -signkey dashboard.key -out dashboard.crt 
 #删除原有的证书secret
 kubectl delete secret kubernetes-dashboard-certs -n kube-system
@@ -1065,7 +1057,7 @@ kubectl describe secret dashboard-admin-token-mlbnl  -n kube-system
 # 取出tocken dashboard-admin-token-mlbnl 为ServiceAccount使用的Secret
 DASH_TOCKEN=$(kubectl get secret -n kube-system dashboard-admin-token-mlbnl -o jsonpath={.data.token}|base64 -d)
 # 增加服务器地址
-kubectl config set-cluster kubernetes --server=192.168.128.130:6443 --kubeconfig=/opt/kubernetes/cfg/dashbord-admin.conf
+kubectl config set-cluster kubernetes --server=192.168.0.130:6443 --kubeconfig=/opt/kubernetes/cfg/dashbord-admin.conf
 # 导入tocken
 kubectl config set-credentials dashboard-admin --token=$DASH_TOCKEN --kubeconfig=/opt/kubernetes/cfg/dashbord-admin.conf
 # 设置上下文

@@ -58,3 +58,4 @@ cd /usr/local/harbor
 vim harbor.yaml
 ./install.sh
 ```
+#### 3. 方案3_k8s_pod方式
